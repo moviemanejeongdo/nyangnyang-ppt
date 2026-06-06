@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냥냥 카페 1호점 프로젝트 발표</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            /* VR 게임 환경 느낌을 주는 입체적인 그라데이션 및 홀로그램 핑크 */
+            --bg-gradient: radial-gradient(circle at 50% 50%, #ffe4e1 0%, #ffc0cb 50%, #ffb6c1 100%);
+            --glass-bg: rgba(255, 255, 255, 0.25);
+            --glass-border: rgba(255, 255, 255, 0.6);
+            --primary-color: #ffb6c1;
+            --secondary-color: #ff1493; /* 네온 핑크에 가까운 강렬한 색 */
+            --text-color: #4a3b3b;
+            --neon-shadow: 0 0 15px rgba(255, 20, 147, 0.5);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Jua', sans-serif;
+            background: var(--bg-gradient);
+            color: var(--text-color);
+            overflow: hidden;
+            perspective: 1500px;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' style='font-size:24px'><text y='24'>🐾</text></svg>") 12 12, auto;
+        }
+
+        /* VR 그리드 배경 느낌 추가 */
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px);
+            background-size: 50px 50px;
+            transform: perspective(1000px) rotateX(60deg) translateY(-100px) translateZ(-200px);
+            opacity: 0.5;
+            z-index: -1;
+        }
+
+        #presentation {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            transform-style: preserve-3d;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            transform: rotateY(90deg) translateZ(400px);
+            transition: all 0.8s cubic-bezier(0.68, -0.55, 0.27, 1.55); 
+            padding: 40px 40px 200px 40px; /* 하단 겹침 방지를 위해 하단 패딩 대폭 확대 */
+            box-sizing: border-box;
+            text-align: center;
+            transform-origin: center center -500px;
+        }
+
+        .slide.active {
+            opacity: 1;
+            transform: rotateY(0deg) translateZ(0);
+        }
+
+        .slide.prev {
+            transform: rotateY(-90deg) translateZ(400px);
+            opacity: 0;
+        }
+
+        /* 글자 크기 10~15% 축소 (여백 확보) 및 VR 네온 텍스트 효과 */
+        h1 {
+            font-size: 6.5em; /* 8em -> 6.5em */
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 0px #fff, var(--neon-shadow);
+            margin-bottom: 20px;
+            transform: translateZ(80px);
+        }
+
+        /* Glassmorphism 패널 스타일 (h2, ul 등 적용) */
+        .glass-panel {
+            background: var(--glass-bg);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 2px solid var(--glass-border);
+            border-top: 3px solid rgba(255, 255, 255, 0.9);
+            border-left: 3px solid rgba(255, 255, 255, 0.9);
+            border-radius: 40px;
+            box-shadow: 10px 10px 30px rgba(255, 105, 180, 0.2), inset 0 0 20px rgba(255,255,255,0.5);
+        }
+
+        h2 {
+            font-size: 4.2em; /* 5em -> 4.2em */
+            color: var(--secondary-color);
+            padding: 20px 50px;
+            margin-bottom: 30px;
+            transform: translateZ(60px);
+        }
+
+        p, li {
+            font-size: 2.6em; /* 3em -> 2.6em */
+            line-height: 1.5;
+            text-shadow: 1px 1px 3px rgba(255,255,255,0.8);
+            transform: translateZ(40px);
+            margin: 10px 0;
+        }
+
+        ul {
+            list-style: none;
+            padding: 30px 60px;
+            text-align: left;
+            display: inline-block;
+            transform: translateZ(30px);
+        }
+
+        li::before {
+            content: '🐾 ';
+            color: var(--secondary-color);
+            text-shadow: var(--neon-shadow);
+        }
+
+        /* 서브 리스트용 스타일 (팀원별 역할 디테일 등) */
+        .sub-list {
+            font-size: 0.8em;
+            color: #665;
+            margin-left: 40px;
+            margin-top: 5px;
+            line-height: 1.3;
+        }
+        .sub-list::before {
+            content: '└ ';
+            color: #ff69b4;
+        }
+
+        .img-container {
+            margin: 20px 0;
+            animation: float3D 4s ease-in-out infinite;
+            transform-style: preserve-3d;
+        }
+
+        .img-container img {
+            width: 350px; /* 400px -> 350px */
+            height: 350px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 10px solid rgba(255,255,255,0.8);
+            /* 홀로그램/글래스모피즘 이미지 테두리 효과 */
+            box-shadow: 0 0 40px rgba(255, 20, 147, 0.4), inset 0px 0px 20px rgba(255,255,255,0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        @keyframes float3D {
+            0% { transform: translateY(0px) rotateX(5deg) rotateY(0deg); }
+            50% { transform: translateY(-30px) rotateX(-5deg) rotateY(15deg); }
+            100% { transform: translateY(0px) rotateX(5deg) rotateY(0deg); }
+        }
+
+        /* 냥냥카페 기믹 버튼 (글래스모피즘 네온 버튼) */
+        .gimmick-btn {
+            background: rgba(255, 105, 180, 0.8);
+            backdrop-filter: blur(10px);
+            color: white;
+            font-family: 'Jua', sans-serif;
+            font-size: 2.8em; /* 3.5em -> 2.8em */
+            padding: 20px 50px;
+            border: 2px solid rgba(255,255,255,0.6);
+            border-radius: 50px;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' style='font-size:24px'><text y='24'>🐾</text></svg>") 12 12, auto;
+            box-shadow: 0px 10px 20px rgba(255, 20, 147, 0.4), inset 0 2px 10px rgba(255,255,255,0.8);
+            transition: all 0.2s;
+            margin-top: 20px;
+            transform: translateZ(80px);
+        }
+
+        .gimmick-btn:active {
+            transform: translateY(10px) translateZ(80px);
+            box-shadow: 0px 2px 5px rgba(255, 20, 147, 0.4);
+        }
+
+        /* 네비게이션 컨트롤 버튼 */
+        .controls {
+            position: fixed;
+            bottom: 95px; /* 오버스캔 화면 잘림 원천 방지를 위해 95px로 여백 확대 */
+            left: 50%;
+            transform: translateX(-50%) translateZ(120px);
+            display: flex;
+            align-items: center; /* 세로 방향 정렬 맞춤 */
+            gap: 20px; /* 인라인 구조에 맞게 간격 조절 */
+            z-index: 100;
+        }
+
+        .control-btn {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            color: var(--secondary-color);
+            font-family: 'Jua', sans-serif;
+            font-size: 2em; /* 2.5em -> 2em */
+            padding: 15px 40px;
+            border: 2px solid var(--glass-border);
+            border-radius: 40px;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' style='font-size:24px'><text y='24'>🐾</text></svg>") 12 12, auto;
+            box-shadow: 5px 5px 15px rgba(255, 105, 180, 0.2);
+            transition: all 0.2s;
+        }
+
+        .control-btn:active {
+            transform: translateY(5px);
+            box-shadow: 2px 2px 5px rgba(255, 105, 180, 0.2);
+        }
+
+        /* 간트차트 (글래스모피즘) */
+        .gantt-chart {
+            width: 90%;
+            max-width: 1400px;
+            margin-top: 20px;
+            transform: translateZ(40px);
+            padding: 40px;
+        }
+
+        .gantt-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .gantt-label {
+            width: 300px;
+            font-size: 2em; /* 2.5em -> 2em */
+            font-weight: bold;
+            text-align: right;
+            padding-right: 30px;
+            color: var(--secondary-color);
+            text-shadow: 1px 1px 2px white;
+        }
+
+        .gantt-bar-container {
+            flex-grow: 1;
+            background-color: rgba(255,255,255,0.4);
+            border: 1px solid rgba(255,255,255,0.6);
+            height: 50px;
+            border-radius: 25px;
+            box-shadow: inset 3px 3px 10px rgba(0,0,0,0.1);
+            position: relative;
+        }
+
+        .gantt-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #ff9a9e, #ff1493);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            padding-left: 20px;
+            color: white;
+            font-size: 1.5em; /* 1.8em -> 1.5em */
+            white-space: nowrap;
+            box-shadow: 0 0 15px rgba(255, 20, 147, 0.6);
+        }
+
+        .gantt-dates {
+            display: flex;
+            justify-content: space-between;
+            margin-left: 300px;
+            font-size: 1.8em; /* 2.2em -> 1.8em */
+            color: #555;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+        
+        #mic-status {
+            margin-top: 20px;
+            font-size: 2em;
+            color: var(--secondary-color);
+            height: 40px;
+            transform: translateZ(50px);
+            text-shadow: 0 0 5px white;
+        }
+
+        /* MVP 슬라이드 전용 스타일 */
+        .mvp-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0;
+            flex-wrap: nowrap;
+            margin: 18px 0;
+            transform: translateZ(40px);
+        }
+        .mvp-step {
+            background: rgba(255, 255, 255, 0.35);
+            backdrop-filter: blur(12px);
+            border: 2px solid rgba(255,255,255,0.7);
+            border-radius: 24px;
+            padding: 16px 22px;
+            text-align: center;
+            min-width: 150px;
+            max-width: 170px;
+            box-shadow: 4px 4px 16px rgba(255,105,180,0.18);
+            position: relative;
+        }
+        .mvp-step .step-num {
+            font-size: 1.2em;
+            color: #fff;
+            background: linear-gradient(135deg, #ff9a9e, #ff1493);
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 8px auto;
+            box-shadow: 0 0 10px rgba(255,20,147,0.4);
+            font-weight: bold;
+        }
+        .mvp-step .step-label {
+            font-size: 1.5em;
+            font-weight: bold;
+            color: #4a3b3b;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.9);
+            line-height: 1.3;
+        }
+        .mvp-arrow {
+            font-size: 2em;
+            color: #ff1493;
+            text-shadow: 0 0 8px rgba(255,20,147,0.5);
+            padding: 0 6px;
+            flex-shrink: 0;
+        }
+        .mvp-score-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            width: 92%;
+            max-width: 1200px;
+            margin: 12px auto;
+            transform: translateZ(30px);
+        }
+        .mvp-score-item {
+            background: rgba(255,255,255,0.3);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255,255,255,0.65);
+            border-radius: 20px;
+            padding: 14px 10px;
+            text-align: center;
+            box-shadow: 3px 3px 12px rgba(255,105,180,0.15);
+        }
+        .mvp-score-item .score-icon {
+            font-size: 2em;
+            margin-bottom: 4px;
+        }
+        .mvp-score-item .score-label {
+            font-size: 1.4em;
+            font-weight: bold;
+            color: #ff1493;
+            text-shadow: 0 0 4px rgba(255,255,255,0.8);
+            line-height: 1.3;
+        }
+        .mvp-optional {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 10px 0;
+            transform: translateZ(20px);
+        }
+        .mvp-badge {
+            background: rgba(255, 20, 147, 0.15);
+            border: 2px solid rgba(255,20,147,0.45);
+            border-radius: 30px;
+            padding: 8px 20px;
+            font-size: 1.4em;
+            color: #ff1493;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(255,255,255,0.8);
+            box-shadow: 0 0 8px rgba(255,20,147,0.2);
+        }
+        .mvp-section-title {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: var(--secondary-color);
+            text-shadow: 1px 1px 4px rgba(255,255,255,0.8);
+            margin: 10px 0 6px 0;
+            transform: translateZ(35px);
+        }
+
+        /* 콘티 캐러셀 슬라이드 전용 스타일 */
+        .konti-carousel {
+            position: relative;
+            width: 94%;
+            max-width: 1400px;
+            height: 62vh;
+            overflow: hidden;
+            border-radius: 32px;
+            border: 3px solid rgba(255,255,255,0.7);
+            box-shadow: 0 0 50px rgba(255,20,147,0.25), inset 0 0 30px rgba(255,255,255,0.15);
+            background: rgba(0,0,0,0.2);
+            transform: translateZ(40px);
+        }
+        .konti-track {
+            display: flex;
+            width: 500%; /* 5장 */
+            height: 100%;
+            transition: transform 0.55s cubic-bezier(0.68, -0.1, 0.27, 1.1);
+        }
+        .konti-item {
+            width: 20%; /* 500% / 5 */
+            height: 100%;
+            flex-shrink: 0;
+            position: relative;
+        }
+        .konti-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .konti-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(0,0,0,0.72));
+            color: #fff;
+            font-family: 'Jua', sans-serif;
+            font-size: 1.7em;
+            padding: 18px 28px 18px 28px;
+            text-shadow: 1px 1px 6px rgba(0,0,0,0.9);
+            border-radius: 0 0 30px 30px;
+        }
+        .konti-caption .konti-tag {
+            font-size: 0.75em;
+            background: rgba(255,20,147,0.8);
+            border-radius: 20px;
+            padding: 3px 14px;
+            margin-right: 10px;
+            display: inline-block;
+            box-shadow: 0 0 8px rgba(255,20,147,0.5);
+        }
+        .konti-nav {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 22px;
+            margin-top: 14px;
+            transform: translateZ(30px);
+        }
+        .konti-btn {
+            background: rgba(255,105,180,0.7);
+            backdrop-filter: blur(8px);
+            color: white;
+            font-family: 'Jua', sans-serif;
+            font-size: 1.8em;
+            border: 2px solid rgba(255,255,255,0.6);
+            border-radius: 50%;
+            width: 56px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='32' height='32' style='font-size:24px'><text y='24'>🐾</text></svg>") 12 12, auto;
+            box-shadow: 0 4px 16px rgba(255,20,147,0.35);
+            transition: all 0.2s;
+        }
+        .konti-btn:hover { transform: scale(1.12); }
+        .konti-btn:active { transform: scale(0.95); }
+        .konti-dots {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .konti-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.4);
+            border: 2px solid rgba(255,20,147,0.4);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+        .konti-dot.active {
+            background: #ff1493;
+            border-color: #ff1493;
+            box-shadow: 0 0 8px rgba(255,20,147,0.7);
+            transform: scale(1.3);
+        }
+
+        /* 인라인 페이지 번호 (중앙 controls 영역 내부) */
+        .page-number-inline {
+            font-size: 1.8em;
+            font-family: 'Jua', sans-serif;
+            color: var(--secondary-color);
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid var(--glass-border);
+            padding: 8px 24px;
+            border-radius: 20px;
+            box-shadow: 5px 5px 15px rgba(255, 105, 180, 0.2);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-width: 100px;
+        }
+
+        /* 파티클 캔버스 배경 */
+        #particle-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 50; /* 텍스트 및 카드 뒷배경보다 높은 z-index로 마우스 따라오는 파티클이 앞에 보이게 */
+        }
+    </style>
+</head>
+<body>
+    <!-- 귀여운 냥냥 파티클 캔버스 -->
+    <canvas id="particle-canvas"></canvas>
+
+    <div id="presentation">
+        <!-- Slide 1: 타이틀 -->
+        <div class="slide active" id="slide-1">
+            <div class="img-container">
+                <img src="images/vr_cat_maid.png" alt="VR 고양이 메이드">
+            </div>
+            <h1>냥냥 카페 1호점</h1>
+            <p>팀명: <b>알바들</b></p>
+            <p>가상현실(VR)에서 AI NPC와 소통하는 수치사 유발 시뮬레이션!</p>
+            
+            <button class="gimmick-btn" id="start-btn" onclick="startRecognition()">🎤 "냥냥카페다 냥!" 외치기</button>
+            <div id="mic-status"></div>
+            <a href="stt_test.html" target="_blank" style="color: var(--secondary-color); font-family: 'Jua', sans-serif; font-size: 0.9em; text-decoration: none; margin-top: 15px; display: inline-block; opacity: 0.7; transition: opacity 0.2s;" onmouseover="this.style.opacity=1" onmouseout="this.style.opacity=0.7">🐾 STT 성능 검증실 열기 🎤</a>
+        </div>
+
+        <!-- Slide 2: 프로젝트 컨셉 및 기믹 -->
+        <div class="slide" id="slide-2">
+            <h2 class="glass-panel">✨ 프로젝트 컨셉 및 핵심 기믹</h2>
+            <div class="img-container">
+                <img src="images/hologram_cat_ui.png" alt="홀로그램 고양이 UI">
+            </div>
+            <ul class="glass-panel">
+                <li><b>컨셉:</b> 테이크아웃 전문 고양이 메이드카페 (VR 환경)</li>
+                <li><b>핵심 1:</b> 사용자가 마이크로 "냥냥카페다 냥!" 외쳐야 게임 진행</li>
+                <li><b>핵심 2:</b> Gemma4 LLM을 이용한 STT/TTS NPC 상호작용</li>
+                <li><b>핵심 3:</b> VR 조이스틱을 활용한 현실적인 커피 음료 제조 HUD</li>
+            </ul>
+        </div>
+
+        <!-- Slide 3: 팀원별 역할 및 작업 일정 -->
+        <div class="slide" id="slide-3">
+            <h2 class="glass-panel">👥 역할 분담 세부 목표</h2>
+            <ul class="glass-panel">
+                <li><b>조예은:</b> UI, Git 브랜치 구축, 우유/물, 시럽 시스템 
+                    <div class="sub-list">문서작업(와이어프레임)</div>
+                </li>
+                <li><b>최재빈:</b> NPC LLM 대사, 점수에 맞는 LLM 평가, 그라인더, TTS, STT 시스템 연동
+                    <div class="sub-list">문서작업(콘티)</div>
+                </li>
+                <li><b>황인용:</b> 플레이어 상호작용, 이동, 샷, 탬핑, 스팀, 오브젝트 이펙트 
+                    <div class="sub-list">문서작업(워크플로우)</div>
+                </li>
+                <li><b>정해륜:</b> 맵 디자인, 조이스틱 데이터 모션 인식, 점수에 따른 npc 모션, 얼음 시스템, 손님에게 음료 건네기 액션 
+                    <div class="sub-list">문서작업(워크플로우)</div>
+                </li>
+                <li><b>다같이:</b> 카페 전체 맵 디자인 및 3D 에셋(Asset) 서칭 배치</li>
+            </ul>
+        </div>
+
+        <!-- Slide 4: 게임 플레이 시나리오 -->
+        <div class="slide" id="slide-4">
+            <h2 class="glass-panel">🎮 VR 인게임 플레이 시나리오</h2>
+            <div class="img-container">
+                <img src="images/fps_cafe.png" alt="FPS 시점 카페">
+            </div>
+            <ul class="glass-panel">
+                <li><b>1. 주문받기:</b> 홀로그램 UI를 통해 LLM NPC와 대화</li>
+                <li><b>2. 음료제조:</b> 1인칭(FPS) 시점으로 VR 조이스틱 조작</li>
+                <li><b>3. 서빙하기:</b> 완성된 음료를 손님 NPC에게 건네기</li>
+                <li><b>4. 평가받기:</b> 제조 스탯을 채점하여 손님의 칭찬!</li>
+            </ul>
+        </div>
+
+        <!-- Slide 5: 게임 콘티 캐러셀 (신규) -->
+        <div class="slide" id="slide-5">
+            <h2 class="glass-panel">🎬 게임 시나리오 콘티</h2>
+
+            <div class="konti-carousel">
+                <div class="konti-track" id="konti-track">
+                    <div class="konti-item">
+                        <img src="콘티/손님맞이.png" alt="솔님 맞이">
+                        <div class="konti-caption">
+                            <span class="konti-tag">10:00 AM</span>
+                            콘티 1 NPC 입장 &amp; 주문 대기
+                        </div>
+                    </div>
+                    <div class="konti-item">
+                        <img src="콘티/인트로 콘티.jpg" alt="인트로">
+                        <div class="konti-caption">
+                            <span class="konti-tag">10:03 AM</span>
+                            콘티 2 플레이어 아바타 시네머신
+                        </div>
+                    </div>
+                    <div class="konti-item">
+                        <img src="콘티/카페전경.png" alt="카페 전경">
+                        <div class="konti-caption">
+                            <span class="konti-tag">10:05 AM</span>
+                            콘티 3 카페 전경
+                        </div>
+                    </div>
+                    <div class="konti-item">
+                        <img src="콘티/1인칭 커피제조 콘티.png" alt="1인칭 커피 제조">
+                        <div class="konti-caption">
+                            <span class="konti-tag">10:07 AM</span>
+                            콘티 4 커피 제조 조작 (VR 조이스틱)
+                        </div>
+                    </div>
+                    <div class="konti-item">
+                        <img src="콘티/손님이커피받은모습.jpg" alt="선제결과">
+                        <div class="konti-caption">
+                            <span class="konti-tag">10:10 AM</span>
+                            콘티 5 &amp; 평가 — 손님 만족도 측정
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="konti-nav">
+                <button class="konti-btn" id="konti-prev" onclick="kontiPrev()">◀</button>
+                <div class="konti-dots" id="konti-dots">
+                    <div class="konti-dot active" onclick="kontiGo(0)"></div>
+                    <div class="konti-dot" onclick="kontiGo(1)"></div>
+                    <div class="konti-dot" onclick="kontiGo(2)"></div>
+                    <div class="konti-dot" onclick="kontiGo(3)"></div>
+                    <div class="konti-dot" onclick="kontiGo(4)"></div>
+                </div>
+                <button class="konti-btn" id="konti-next" onclick="kontiNext()">▶</button>
+            </div>
+        </div>
+
+        <!-- Slide 6: MVP 게임 플레이 시나리오 -->
+        <div class="slide" id="slide-6">
+            <h2 class="glass-panel">🚀 MVP 게임 플레이 시나리오</h2>
+
+            <!-- 플로우 화살표 -->
+            <div class="mvp-flow">
+                <div class="mvp-step">
+                    <div class="step-num">1</div>
+                    <div class="step-label">📋 주문받기<br><span style="font-size:0.75em;color:#666;">LLM 대화형식</span></div>
+                </div>
+                <div class="mvp-arrow">▶</div>
+                <div class="mvp-step">
+                    <div class="step-num">2</div>
+                    <div class="step-label">☕ 음료 제조<br><span style="font-size:0.75em;color:#666;">레시피 UI 보며</span></div>
+                </div>
+                <div class="mvp-arrow">▶</div>
+                <div class="mvp-step">
+                    <div class="step-num">3</div>
+                    <div class="step-label">🥤 손님께<br>건네기</div>
+                </div>
+                <div class="mvp-arrow">▶</div>
+                <div class="mvp-step">
+                    <div class="step-num">4</div>
+                    <div class="step-label">⭐ 평가받기<br><span style="font-size:0.75em;color:#666;">채점 & 칭찬</span></div>
+                </div>
+            </div>
+
+            <!-- 채점 기준 -->
+            <p class="mvp-section-title">🎯 점수 채점 기준</p>
+            <div class="mvp-score-grid">
+                <div class="mvp-score-item">
+                    <div class="score-icon">💨</div>
+                    <div class="score-label">스팀 각도</div>
+                </div>
+                <div class="mvp-score-item">
+                    <div class="score-icon">⚙️</div>
+                    <div class="score-label">그라인더<br>초수 (양)</div>
+                </div>
+                <div class="mvp-score-item">
+                    <div class="score-icon">🔨</div>
+                    <div class="score-label">탬핑<br>(한 번에)</div>
+                </div>
+                <div class="mvp-score-item">
+                    <div class="score-icon">💧</div>
+                    <div class="score-label">우유 / 물 양</div>
+                </div>
+                <div class="mvp-score-item">
+                    <div class="score-icon">🫧</div>
+                    <div class="score-label">펌프 횟수</div>
+                </div>
+            </div>
+
+            <!-- 선택 사항 -->
+            <p class="mvp-section-title">✨ 선택 콘텐츠 (추가 목표)</p>
+            <div class="mvp-optional">
+                <span class="mvp-badge">🗣️ LLM 주문받기</span>
+                <span class="mvp-badge">🎨 라떼 아트</span>
+                <span class="mvp-badge">⏱️ 타임어택</span>
+                <span class="mvp-badge">🌊 러쉬타임</span>
+                <span class="mvp-badge">🍰 디저트</span>
+                <span class="mvp-badge">🧃 블렌더 / 차</span>
+            </div>
+        </div>
+
+        <!-- Slide 6: 개발 일정 간트차트 -->
+        <div class="slide" id="slide-7">
+            <h2 class="glass-panel">📅 전체 개발 일정 (Gantt Chart)</h2>
+            <div class="gantt-chart glass-panel">
+                <div class="gantt-row">
+                    <div class="gantt-label">기획 및 설계</div>
+                    <div class="gantt-bar-container">
+                        <div class="gantt-bar" style="width: 25%; margin-left: 0%;">5/11 ~ 5/22</div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label">상호작용 MVP</div>
+                    <div class="gantt-bar-container">
+                        <div class="gantt-bar" style="width: 20%; margin-left: 25%;">5/23 ~ 5/26</div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label">UI 및 평가 시스템</div>
+                    <div class="gantt-bar-container">
+                        <div class="gantt-bar" style="width: 15%; margin-left: 45%;">5/27 ~ 5/29</div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label">중간 발표</div>
+                    <div class="gantt-bar-container">
+                        <div class="gantt-bar" style="width: 5%; margin-left: 60%; background: #fff; color: #ff1493;">5/29</div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label">그래픽스 수업 병행</div>
+                    <div class="gantt-bar-container">
+                        <div class="gantt-bar" style="width: 30%; margin-left: 65%;">6/1 ~ 6/8</div>
+                    </div>
+                </div>
+                <div class="gantt-row">
+                    <div class="gantt-label">최종 발표</div>
+                    <div class="gantt-bar-container">
+                        <div class="gantt-bar" style="width: 5%; margin-left: 95%; background: #fff; color: #ff1493;">6/9</div>
+                    </div>
+                </div>
+                <div class="gantt-dates">
+                    <span>5/21</span>
+                    <span>5/22</span>
+                    <span>5/29</span>
+                    <span>6/1</span>
+                    <span>6/9</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: 감사합니다 (마지막 슬라이드) -->
+        <div class="slide" id="slide-8">
+            <div class="img-container">
+                <img src="images/cat_maid_waving.png" alt="인사하는 냥냥 메이드">
+            </div>
+            <h1>냥냥카페 많이 사랑해달라 냥! 🐾</h1>
+            <h2 class="glass-panel">감사합니다!</h2>
+            <p class="glass-panel" style="padding: 10px 40px; border-radius: 30px;">혹시 질문 있으신가요?</p>
+        </div>
+    </div>
+
+    <!-- 네비게이션 버튼 및 페이지 번호 통합 (화면 잘림 원천 방지) -->
+    <div class="controls">
+        <button class="control-btn" onclick="prevSlide()">◀ 이전</button>
+        <span class="page-number-inline" id="page-indicator-inline">1 / 8</span>
+        <button class="control-btn" onclick="nextSlide()">다음 ▶</button>
+    </div>
+
+    <script>
+        let currentSlide = 0;
+        const slides = document.querySelectorAll('.slide');
+        const pageIndicator = document.getElementById('page-indicator-inline');
+        const totalSlides = slides.length;
+
+        // --- Web Audio API 귀여운 뽀롱 효과음 ---
+        let audioCtx = null;
+        function initAudio() {
+            if (!audioCtx) {
+                audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+            }
+        }
+
+        function playPporong() {
+            try {
+                initAudio();
+                if (audioCtx.state === 'suspended') {
+                    audioCtx.resume();
+                }
+                const now = audioCtx.currentTime;
+
+                // 1단계: '뽀' (부드럽게 튀는 트라이앵글 파형)
+                const osc1 = audioCtx.createOscillator();
+                const gain1 = audioCtx.createGain();
+                osc1.type = 'triangle';
+                osc1.frequency.setValueAtTime(350, now);
+                osc1.frequency.exponentialRampToValueAtTime(700, now + 0.08);
+
+                gain1.gain.setValueAtTime(0.12, now);
+                gain1.gain.exponentialRampToValueAtTime(0.01, now + 0.1);
+
+                osc1.connect(gain1);
+                gain1.connect(audioCtx.destination);
+                osc1.start(now);
+                osc1.stop(now + 0.1);
+
+                // 2단계: '롱' (약간 시간차를 두고 고음으로 올라가는 맑은 사인파)
+                const delay = 0.06;
+                const osc2 = audioCtx.createOscillator();
+                const gain2 = audioCtx.createGain();
+                osc2.type = 'sine';
+                osc2.frequency.setValueAtTime(600, now + delay);
+                osc2.frequency.exponentialRampToValueAtTime(1300, now + delay + 0.12);
+
+                gain2.gain.setValueAtTime(0.12, now + delay);
+                gain2.gain.exponentialRampToValueAtTime(0.01, now + delay + 0.15);
+
+                osc2.connect(gain2);
+                gain2.connect(audioCtx.destination);
+                osc2.start(now + delay);
+                osc2.stop(now + delay + 0.15);
+            } catch (e) {
+                console.log("Audio play deferred until user interaction.");
+            }
+        }
+
+        let previousSlide = 0;
+        function updateSlides(playSound = true) {
+            // 콘티 슬라이드(index 4) 진입 시 이전 슬라이드 위치에 따라 캐러셀 인덱스 초기화
+            if (currentSlide === 4 && typeof kontiIndex !== 'undefined') {
+                if (previousSlide < 4) {
+                    kontiIndex = 0;
+                } else if (previousSlide > 4) {
+                    kontiIndex = KONTI_TOTAL - 1;
+                }
+                kontiUpdateUI();
+            }
+
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active', 'prev');
+                if (index === currentSlide) {
+                    slide.classList.add('active');
+                } else if (index < currentSlide) {
+                    slide.classList.add('prev');
+                }
+            });
+            // 페이지 번호 업데이트
+            pageIndicator.innerText = `${currentSlide + 1} / ${totalSlides}`;
+            
+            if (playSound) {
+                playPporong();
+            }
+
+            previousSlide = currentSlide;
+        }
+
+        function nextSlide() {
+            if (currentSlide < slides.length - 1) {
+                currentSlide++;
+                updateSlides(true);
+            }
+        }
+
+        function prevSlide() {
+            if (currentSlide > 0) {
+                currentSlide--;
+                updateSlides(true);
+            }
+        }
+
+        // --- 콘티 캐러셀 JS ---
+        let kontiIndex = 0;
+        const KONTI_TOTAL = 5;
+
+        function kontiUpdateUI() {
+            const track = document.getElementById('konti-track');
+            if (!track) return;
+            track.style.transform = `translateX(-${kontiIndex * 20}%)`;
+            const dots = document.querySelectorAll('.konti-dot');
+            dots.forEach((d, i) => {
+                d.classList.toggle('active', i === kontiIndex);
+            });
+        }
+
+        function kontiGo(idx) {
+            kontiIndex = Math.max(0, Math.min(idx, KONTI_TOTAL - 1));
+            kontiUpdateUI();
+            playPporong();
+        }
+
+        function kontiNext() {
+            kontiIndex = (kontiIndex + 1) % KONTI_TOTAL;
+            kontiUpdateUI();
+            playPporong();
+        }
+
+        function kontiPrev() {
+            kontiIndex = (kontiIndex - 1 + KONTI_TOTAL) % KONTI_TOTAL;
+            kontiUpdateUI();
+            playPporong();
+        }
+
+        // Web Speech API 기믹 구현
+        function startRecognition() {
+            initAudio(); // 음성 인식 시작과 동시에 오디오 컨텍스트 활성화
+            
+            const statusDiv = document.getElementById('mic-status');
+            const btn = document.getElementById('start-btn');
+            
+            // Web Speech API 지원 여부 확인
+            window.SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+            
+            if (!window.SpeechRecognition) {
+                statusDiv.innerText = "이 브라우저에서는 음성 인식을 지원하지 않습니다 ㅠㅠ (버튼 클릭으로 넘어갑니다!)";
+                playPporong();
+                setTimeout(nextSlide, 1500);
+                return;
+            }
+
+            const recognition = new SpeechRecognition();
+            recognition.lang = 'ko-KR';
+            recognition.interimResults = false;
+            recognition.maxAlternatives = 1;
+
+            btn.innerText = "듣고 있다 냥! 말씀해 주세요...";
+            statusDiv.innerText = "🎤 마이크 켜짐... '냥냥카페다 냥' 이라고 말해보세요!";
+            
+            playPporong(); // 마이크 활성화 뽀롱음 재생
+            recognition.start();
+
+            recognition.onresult = function(event) {
+                const speechResult = event.results[0][0].transcript.trim().replace(/\s/g, '');
+                statusDiv.innerText = `인식된 음성: "${event.results[0][0].transcript}"`;
+                
+                // 냥냥카페다냥 과 유사한 발음 처리
+                if (speechResult.includes("냥냥") || speechResult.includes("카페")) {
+                    btn.innerText = "✨ 대환영이다 냥! ✨";
+                    btn.style.backgroundColor = "#fff";
+                    btn.style.color = "#ff1493";
+                    playPporong(); // 성공음 재생
+                    setTimeout(nextSlide, 1500);
+                } else {
+                    btn.innerText = "다시 말해달라 냥! 💢";
+                    statusDiv.innerText += " (수치심이 부족합니다. 다시 시도하세요!)";
+                }
+            };
+
+            recognition.onerror = function(event) {
+                statusDiv.innerText = "음성 인식 에러! 마이크 권한을 확인해주세요.";
+                btn.innerText = "🎤 \"냥냥카페다 냥!\" 외치기";
+            };
+            
+            recognition.onend = function() {
+                if(btn.innerText.includes("듣고 있다")) {
+                    btn.innerText = "🎤 \"냥냥카페다 냥!\" 외치기";
+                }
+            };
+        }
+
+        // 슬라이드 및 캐러셀 통합 제어 함수 (PPT 리모콘 / 키보드 / 휠 / 클릭용)
+        function triggerNext() {
+            if (currentSlide === 4 && kontiIndex < KONTI_TOTAL - 1) {
+                kontiIndex++;
+                kontiUpdateUI();
+                playPporong();
+            } else {
+                nextSlide();
+            }
+        }
+
+        function triggerPrev() {
+            if (currentSlide === 4 && kontiIndex > 0) {
+                kontiIndex--;
+                kontiUpdateUI();
+                playPporong();
+            } else {
+                prevSlide();
+            }
+        }
+
+        // 1. 키보드 방향키 및 PPT 리모콘 조작 지원
+        document.addEventListener('keydown', (e) => {
+            // 포커스가 버튼이나 입력 필드에 있을 경우 스페이스바/엔터키는 기본 동작 유지
+            const activeEl = document.activeElement;
+            if (activeEl && (activeEl.tagName === 'BUTTON' || activeEl.tagName === 'INPUT' || activeEl.tagName === 'TEXTAREA' || activeEl.tagName === 'A')) {
+                if (e.key === ' ' || e.key === 'Space' || e.key === 'Enter') {
+                    return;
+                }
+            }
+
+            // PPT 리모컨의 '이전' 버튼이나 키보드 이전 키
+            if (e.key === 'ArrowLeft' || e.key === 'ArrowUp' || e.key === 'PageUp' || e.key === 'Backspace') {
+                e.preventDefault();
+                triggerPrev();
+            }
+            // PPT 리모컨의 '다음' 버튼이나 키보드 다음 키
+            else if (e.key === 'ArrowRight' || e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ' || e.key === 'Space' || e.key === 'Enter') {
+                e.preventDefault();
+                triggerNext();
+            }
+        });
+
+        // 2. 마우스 휠 (스크롤) 조작 지원 (과도한 휠 동작 방지를 위해 쿨다운 적용)
+        let lastScrollTime = 0;
+        const scrollCooldown = 800; // 0.8초 쿨다운
+        window.addEventListener('wheel', (e) => {
+            const now = Date.now();
+            if (now - lastScrollTime < scrollCooldown) return;
+
+            if (Math.abs(e.deltaY) > 30) {
+                lastScrollTime = now;
+                if (e.deltaY > 0) {
+                    triggerNext();
+                } else {
+                    triggerPrev();
+                }
+            }
+        }, { passive: true });
+
+        // 3. 화면 클릭으로 다음 슬라이드 이동 (Google 슬라이드 방식, 대화형 요소 클릭은 제외)
+        document.addEventListener('click', (e) => {
+            initAudio(); // 클릭 시 오디오 컨텍스트 활성화
+
+            // 대화형 요소 목록 (버튼, 링크, 캐러셀 점/버튼 등)
+            const interactiveSelectors = [
+                'button', 
+                'a', 
+                'input', 
+                'select', 
+                'textarea', 
+                '.konti-dot', 
+                '.konti-btn', 
+                '.control-btn', 
+                '.gimmick-btn',
+                '#start-btn'
+            ];
+            
+            const isInteractive = e.target.closest(interactiveSelectors.join(','));
+            if (isInteractive) return;
+
+            // 대화형 요소가 아닌 화면 빈 곳을 클릭했을 때 다음 슬라이드로 이동
+            triggerNext();
+        });
+
+        // 초기 슬라이드 렌더링 (첫 로드 시에는 오디오 재생을 건너뛰어 브라우저 에러 차단)
+        updateSlides(false);
+    </script>
+</body>
+</html>
