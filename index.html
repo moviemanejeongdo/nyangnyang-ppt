@@ -2695,8 +2695,30 @@
                         <div class="issue-carousel-track" id="issue-carousel-track">
                             <article class="issue-card">
                                 <div class="issue-card-label">조예은</div>
+                                <h3>액체 스케일 및 위치 문제</h3>
+                                <p>액체 오브젝트 Scale 증가 시 양방향 확대로 컵 바닥을 뚫고 내려가는 문제 발생. 증가한 높이의 절반만큼 Y축 위치를 위로 보정하여 해결.</p>
+                                <div class="issue-tags">
+                                    <span>Transform Scale</span>
+                                    <span>Y축 위치 보정</span>
+                                    <span>수위 계산</span>
+                                </div>
+                            </article>
+
+                            <article class="issue-card">
+                                <div class="issue-card-label">조예은</div>
+                                <h3>파티클 재생 불안정</h3>
+                                <p>디스펜서 버튼 클릭 시 파티클이 정상 출력되지 않는 문제. 기존 StopEmitting 대신 StopEmittingAndClear로 남은 파티클을 즉시 제거해 안정적인 재생 구현.</p>
+                                <div class="issue-tags">
+                                    <span>Particle System</span>
+                                    <span>StopEmittingAndClear</span>
+                                    <span>재생 초기화</span>
+                                </div>
+                            </article>
+
+                            <article class="issue-card">
+                                <div class="issue-card-label">정해륜</div>
                                 <h3>얼음 배출 물리 상호작용</h3>
-                                <p>스쿠퍼를 기울여도 얼음이 자연스럽게 배출되지 않거나 충돌로 인한 비정상 움직임 발생. 스쿠퍼 내부 얼음을 Socket 방식으로 관리하고, 특정 기울기 이상에서 소켓 해제 구조 구현.</p>
+                                <p>스쿠퍼를 기울여도 얼음이 배출되지 않거나 충돌 문제 발생. 스쿠퍼 내부 얼음을 Socket 방식으로 관리하고, 특정 기울기 이상에서 소켓을 해제해 자연스러운 물리 구현.</p>
                                 <div class="issue-tags">
                                     <span>Socket 관리</span>
                                     <span>기울기 해제</span>
@@ -2705,24 +2727,13 @@
                             </article>
 
                             <article class="issue-card">
-                                <div class="issue-card-label">조예은</div>
+                                <div class="issue-card-label">정해륜</div>
                                 <h3>물리 설정과 감도 조정</h3>
-                                <p>얼음, 스쿠퍼, 컵 간 충돌 판정과 인터랙션 감도 불안정. Collider, Rigidbody, 기울기 기준값 반복 조정으로 배출 시점과 사용자 경험 보정.</p>
+                                <p>얼음, 스쿠퍼, 컵 간 충돌 판정과 인터랙션 감도 불안정으로 예상치 못한 동작 발생. Collider, Rigidbody, 기울기 기준값을 반복 조정하여 사용자 경험 개선.</p>
                                 <div class="issue-tags">
                                     <span>Collider</span>
                                     <span>Rigidbody</span>
                                     <span>Threshold Tuning</span>
-                                </div>
-                            </article>
-
-                            <article class="issue-card">
-                                <div class="issue-card-label">최재빈</div>
-                                <h3>AI 통신 메모리 한계</h3>
-                                <p>완전 양방향 통신과 끼어들기 구조에서 8GB 메모리 초과(OOM) 발생. 2초 미만 저지연과 쾌적한 대화 템포 유지를 위해 Half-Duplex 방식 채택.</p>
-                                <div class="issue-tags">
-                                    <span>8GB OOM</span>
-                                    <span>Low Latency</span>
-                                    <span>Half-Duplex</span>
                                 </div>
                             </article>
 
@@ -2738,26 +2749,25 @@
                             </article>
 
                             <article class="issue-card">
-                                <div class="issue-card-label">정해륜</div>
-                                <h3>분리된 씬과 기능 연결</h3>
-                                <p>씬 분리로 충돌 문제는 감소했지만, 각자 제작한 기능을 하나의 플레이 흐름으로 연결하는 과정에서 난도 증가. 가상환경 실감 구현에 필요한 세부 요소 체감.</p>
+                                <div class="issue-card-label">최재빈</div>
+                                <h3>AI 통신 메모리 한계</h3>
+                                <p>완전 양방향 통신(끼어들기) 시 8GB 메모리 초과(OOM) 발생. 2초 미만 저지연 사수와 쾌적한 템포 유지를 위해 Half-Duplex 방식 채택.</p>
                                 <div class="issue-tags">
-                                    <span>Scene Integration</span>
-                                    <span>Feature Merge</span>
-                                    <span>Realism Detail</span>
+                                    <span>8GB OOM</span>
+                                    <span>Low Latency</span>
+                                    <span>Half-Duplex</span>
                                 </div>
                             </article>
-
-
                         </div>
                     </div>
 
                     <div class="issue-carousel-nav" aria-label="개발 이슈 캐러셀 상태">
-                        <button class="issue-dot active" type="button" data-issue-index="0" aria-label="이슈 1"></button>
-                        <button class="issue-dot" type="button" data-issue-index="1" aria-label="이슈 2"></button>
-                        <button class="issue-dot" type="button" data-issue-index="2" aria-label="황인용 이슈"></button>
-                        <button class="issue-dot" type="button" data-issue-index="3" aria-label="정해륜 이슈"></button>
-                        <button class="issue-dot" type="button" data-issue-index="4" aria-label="최재빈 이슈"></button>
+                        <button class="issue-dot active" type="button" data-issue-index="0" aria-label="조예은 이슈 1"></button>
+                        <button class="issue-dot" type="button" data-issue-index="1" aria-label="조예은 이슈 2"></button>
+                        <button class="issue-dot" type="button" data-issue-index="2" aria-label="정해륜 이슈 1"></button>
+                        <button class="issue-dot" type="button" data-issue-index="3" aria-label="정해륜 이슈 2"></button>
+                        <button class="issue-dot" type="button" data-issue-index="4" aria-label="황인용 이슈"></button>
+                        <button class="issue-dot" type="button" data-issue-index="5" aria-label="최재빈 이슈"></button>
                         <div class="issue-progress"><span class="issue-progress-fill" id="issue-progress-fill"></span></div>
                     </div>
                 </div>
