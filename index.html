@@ -2519,9 +2519,35 @@
                 <div class="slide5-sub-page" id="slide5-sub-3">
                     <div class="ingredient-process-container">
                         <div class="ingredient-visual-panel">
-                            <!-- 나중에 GIF로 교체할 때는 아래 src만 변경하면 됩니다. -->
-                            <img src="유니티images/5페이지/물_우유_시럽.png" alt="물, 우유, 시럽 제조 과정">
+                            <!-- 세 개의 GIF 이미지가 페이드 트랜지션 효과와 함께 번갈아 나타납니다. -->
+                            <img src="유니티images/5페이지/cup.gif" alt="물, 우유, 시럽 제조 과정" id="drink-recipe-img" style="transition: opacity 0.5s ease-in-out;">
                             <div class="ingredient-caption">Water · Milk · Syrup</div>
+                            <script>
+                                (function() {
+                                    const images = [
+                                        "유니티images/5페이지/cup.gif",
+                                        "유니티images/5페이지/steam1.gif",
+                                        "유니티images/5페이지/steam2.gif"
+                                    ];
+                                    // 이미지 캐싱 (flicker 방지)
+                                    images.forEach(src => {
+                                        const img = new Image();
+                                        img.src = src;
+                                    });
+                                    let currentIndex = 0;
+                                    const imgElement = document.getElementById("drink-recipe-img");
+                                    if (imgElement) {
+                                        setInterval(() => {
+                                            imgElement.style.opacity = '0';
+                                            setTimeout(() => {
+                                                currentIndex = (currentIndex + 1) % images.length;
+                                                imgElement.src = images[currentIndex];
+                                                imgElement.style.opacity = '1';
+                                            }, 500);
+                                        }, 4000); // 4초 간격으로 회전
+                                    }
+                                })();
+                            </script>
                         </div>
 
                         <div class="ingredient-text-panel">
