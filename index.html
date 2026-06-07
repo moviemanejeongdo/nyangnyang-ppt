@@ -1878,14 +1878,7 @@
             object-position: center center;
             display: block;
             border-radius: 16px;
-            background:
-                linear-gradient(45deg, rgba(255, 255, 255, 0.75) 25%, transparent 25%),
-                linear-gradient(-45deg, rgba(255, 255, 255, 0.75) 25%, transparent 25%),
-                linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.75) 75%),
-                linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.75) 75%),
-                #ece4d7;
-            background-position: 0 0, 0 12px, 12px -12px, -12px 0;
-            background-size: 24px 24px;
+            background-color: #ffffff;
             box-shadow:
                 inset 9px 9px 18px rgba(122, 104, 82, 0.10),
                 inset -9px -9px 18px rgba(255, 255, 255, 0.74);
@@ -3071,7 +3064,14 @@
             "유니티images/6페이지/03.png",
             "유니티images/6페이지/04.png",
             "유니티images/6페이지/05.png",
-            "유니티images/6페이지/2d 느낌 ChatGPT Image 2026년 5월 30일 오전 02_32_42.png",
+            "유니티images/6페이지/06.png",
+            "유니티images/6페이지/07.png",
+            "유니티images/6페이지/08.png",
+            "유니티images/6페이지/11.png",
+            "유니티images/6페이지/12.png",
+            "유니티images/6페이지/13.png",
+            "유니티images/6페이지/14.png",
+            "유니티images/6페이지/15.png",
             "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오전 02_30_13.png",
             "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오전 02_51_45.png",
             "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오전 03_39_15.png",
@@ -3088,7 +3088,6 @@
             "유니티images/6페이지/스크린샷 2026-05-30 155537.png",
             "유니티images/6페이지/스크린샷 2026-05-30 155613.png",
             "유니티images/6페이지/스크린샷 2026-05-30 170714.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 170754.png",
             "유니티images/6페이지/스크린샷 2026-05-30 203102.png",
             "유니티images/6페이지/스크린샷 2026-05-31 175422.png",
             "유니티images/6페이지/스크린샷 2026-05-31 215430.png",
@@ -3097,11 +3096,11 @@
             "유니티images/6페이지/스크린샷 2026-06-07 130007.png",
             "유니티images/6페이지/스크린샷 2026-06-07 130016.png",
             "유니티images/6페이지/스크린샷 2026-06-07 130042.png",
+            "유니티images/6페이지/스크린샷 2026-06-07 152341.png",
+            "유니티images/6페이지/스크린샷 2026-06-07 152358.png",
             "유니티images/6페이지/일반손님.png",
-            "유니티images/6페이지/진상손님.png",
-            "유니티images/6페이지/틱톡커.png",
-            "유니티images/6페이지/플레이어.png"
-        ].sort(sortIssuePhotoSource);
+            "유니티images/6페이지/진상손님.png"
+        ];
 
         function showIssueCard(index, playSound = true) {
             const cards = Array.from(document.querySelectorAll('#slide-6 .issue-card'));
@@ -3209,6 +3208,7 @@
 
         function startIssuePhotoRotator() {
             stopIssuePhotoRotator();
+            issuePhotoCursor = 0;
             primeIssuePhotos();
             rotateIssuePhotos();
             issuePhotoTimer = setInterval(rotateIssuePhotos, 2600);
