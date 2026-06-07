@@ -18,3 +18,8 @@ Desktop.ini
 *.njsproj
 *.sln
 *.swp
+
+# Media Directories (DaVinci Resolve conversion workspace)
+input/
+converted/
+
