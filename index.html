@@ -1289,7 +1289,24 @@
             letter-spacing: 0.1em;
             opacity: 0.5;
             font-family: 'Outfit', sans-serif;
-            pointer-events: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            z-index: 1000;
+        }
+
+        .nav-hint .nav-btn {
+            cursor: pointer;
+            transition: color 0.3s, transform 0.2s, opacity 0.3s;
+            padding: 5px 10px;
+            opacity: 0.7;
+        }
+
+        .nav-hint .nav-btn:hover {
+            color: var(--accent-primary);
+            transform: scale(1.3);
+            font-weight: 800;
+            opacity: 1;
         }
 
         /* ------------------ 슬라이드 5: 주요 기능 구현 (서브페이지 캐러셀 지원) ------------------ */
@@ -1315,8 +1332,9 @@
             position: absolute;
             left: 100px;
             top: 154px;
-            /* 헤더 아래에 딱 붙도록 마진값 세팅 */
-            width: calc(100% - 200px);
+            right: 100px;
+            bottom: 60px;
+            width: auto;
             opacity: 0;
             visibility: hidden;
             transform: translateX(50px);
@@ -1415,205 +1433,678 @@
             letter-spacing: 0.02em;
         }
 
-        /* 5-2: 냥냥 AI 서버 소개 컨테이너 */
-        .server-intro-container {
+        /* 5-2: 냥냥 AI 서버 소개 컨테이너 (New Layout) */
+        .server-intro-container-v2 {
             display: flex;
-            justify-content: space-between;
-            align-items: stretch;
-            gap: 32px;
             width: 100%;
-            margin-top: 10px;
-        }
-
-        .server-text-column {
-            flex: 0.7;
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .server-video-column {
-            flex: 1.3;
-            display: flex;
-            align-items: flex-start;
-            justify-content: center;
-            padding-top: 10px;
-        }
-
-        .server-title {
-            font-size: 40px;
-            font-weight: 800;
-            color: #3a2a20;
-            margin: 0;
-        }
-
-        .server-quote {
-            font-size: 21px;
-            font-style: italic;
-            color: var(--accent-secondary);
-            margin: 0 0 8px 0;
-            padding-left: 14px;
-            border-left: 4px solid var(--accent-secondary);
-            font-weight: 700;
-        }
-
-        .server-cards-list {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
-
-        .server-tech-card {
-            background: rgba(255, 255, 255, 0.72);
-            border: 1px solid rgba(138, 106, 74, 0.12);
-            border-radius: 20px;
-            padding: 16px 24px;
-            box-shadow: 0 8px 25px rgba(92, 61, 33, 0.04);
-            transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), background 0.4s ease, border-color 0.4s ease;
-            margin-bottom: 12px;
-            opacity: 0;
-            transform: translateY(-20px);
-            display: none;
-        }
-
-        .server-tech-card.show {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .server-tech-card:hover {
-            transform: translateY(-3px);
-            background: rgba(255, 255, 255, 0.90);
-            border-color: rgba(92, 141, 98, 0.3);
-            box-shadow: 0 12px 30px rgba(92, 61, 33, 0.08);
-        }
-
-        .server-tech-card h4 {
-            margin-top: 0;
-            margin-bottom: 12px;
-            font-size: 20px;
-            color: #3a2a20;
-            font-weight: 800;
-        }
-
-        .server-tech-card ul {
-            margin: 0;
-            padding: 0;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            list-style-type: none;
-        }
-
-        .server-tech-card li {
-            background: #F3ECE1;
-            /* 라떼 베이지 */
-            color: #4A3B2C;
-            /* 짙은 우드톤 */
-            font-size: 15px;
-            font-weight: 700;
-            padding: 6px 14px;
-            border-radius: 20px;
-            border: 1px solid rgba(138, 106, 74, 0.2);
-            transition: all 0.3s ease;
-            box-shadow: 0 2px 5px rgba(92, 61, 33, 0.05);
-            display: inline-block;
-        }
-
-        .server-tech-card li:hover {
-            transform: translateY(-2px);
-            background: #E8F0E5;
-            /* 은은한 말차 그린 (hover) */
-            color: #2F4D38;
-            box-shadow: 0 5px 10px rgba(92, 61, 33, 0.1);
-            border-color: rgba(92, 141, 98, 0.3);
-        }
-
-        .server-tech-card strong {
-            color: inherit;
-        }
-
-        /* 비디오 데모 프레임 */
-        .video-frame-wrapper {
-            background: rgba(255, 255, 255, 0.2);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border-radius: 24px;
-            padding: 16px 16px 24px 16px;
-            box-shadow:
-                0 25px 45px rgba(0, 0, 0, 0.1),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.4),
-                inset 0 0 20px rgba(255, 255, 255, 0.5);
+            height: 100%;
             position: relative;
-            box-sizing: border-box;
+        }
+
+        .server-carousel-column-v2 {
+            flex: 1;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+            -webkit-mask-image: linear-gradient(to bottom, transparent, black 15%, black 85%, transparent);
+        }
+
+        .server-carousel-track-v2 {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
             width: 100%;
-            max-width: 100%;
-            /* 비디오 가로폭 컬럼 꽉 차게 */
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            transition: transform 0.5s ease, box-shadow 0.5s ease;
+            padding-top: 150px;
+            padding-bottom: 250px;
+            position: relative;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
         }
 
-        .video-frame-wrapper:hover {
-            transform: scale(1.02) translateY(-5px);
-            box-shadow:
-                0 35px 60px rgba(0, 0, 0, 0.15),
-                inset 0 0 0 1px rgba(255, 255, 255, 0.5),
-                inset 0 0 20px rgba(255, 255, 255, 0.6);
+        .server-card-v2 {
+            background: rgba(255, 255, 255, 0.5);
+            border: 1px solid rgba(138, 106, 74, 0.2);
+            border-radius: 16px;
+            padding: 24px 32px;
+            width: 85%;
+            opacity: 0.2;
+            transform: scale(0.9) translateX(50px);
+            transition: all 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            backdrop-filter: blur(8px);
+            margin-bottom: 0;
         }
 
-        .video-frame-wrapper video {
-            width: 100%;
-            height: auto;
-            border-radius: 12px;
-            display: block;
-            background: rgba(0, 0, 0, 0.1);
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+        .server-card-v2.active {
+            opacity: 1;
+            transform: scale(1.0) translateX(0);
+            background: rgba(255, 255, 255, 0.95);
+            box-shadow: 0 20px 40px rgba(92, 61, 33, 0.15);
+            border-left: 8px solid var(--accent-primary);
+            z-index: 10;
         }
 
-        .play-pause-overlay {
+        .server-card-v2 h4 {
+            font-size: 28px;
+            color: #2F4D38;
+            font-weight: 900;
+            margin: 0 0 16px 0;
+            border-bottom: 2px solid rgba(47, 77, 56, 0.1);
+            padding-bottom: 12px;
+        }
+
+        .server-card-v2 ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .server-card-v2 li {
+            font-size: 19px;
+            color: #4A3B2C;
+            font-weight: 700;
+            line-height: 1.5;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .server-card-v2 li::before {
+            content: '•';
             position: absolute;
-            top: calc(50% - 15px);
-            left: 50%;
-            transform: translate(-50%, -50%) scale(0.9);
-            width: 80px;
-            height: 80px;
-            background: rgba(0, 0, 0, 0.4);
+            left: 0;
+            color: var(--accent-primary);
+            font-size: 24px;
+            top: -2px;
+        }
+
+        .highlight-box-v2 {
+            margin-top: 20px;
+            background: rgba(200, 122, 65, 0.12);
+            border-left: 6px solid #c87a41;
+            padding: 20px 24px;
+            border-radius: 8px 16px 16px 8px;
+            font-size: 18px;
+            color: #3a2a20;
+            line-height: 1.6;
+            font-weight: 700;
+        }
+
+        /* 플로팅 비디오 썸네일 */
+        .floating-video-thumbnail {
+            position: absolute;
+            top: 10px;
+            right: 40px;
+            width: 380px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.25);
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 20;
+            border: 4px solid white;
+        }
+        
+        .floating-video-thumbnail:hover {
+            transform: scale(1.08) translateY(-10px);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.35);
+        }
+
+        .floating-video-thumbnail video {
+            width: 100%;
+            display: block;
+        }
+
+        .floating-video-thumbnail .play-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .floating-video-thumbnail:hover .play-overlay {
+            background: rgba(0,0,0,0.1);
+        }
+
+        .floating-video-thumbnail .play-btn {
+            width: 60px;
+            height: 60px;
+            background: var(--accent-primary);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            pointer-events: none;
-            opacity: 0;
-            transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             color: white;
-            z-index: 10;
-            backdrop-filter: blur(4px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            transform: scale(0.9);
+            transition: transform 0.3s;
         }
 
-        .play-pause-overlay.show {
+        .floating-video-thumbnail:hover .play-btn {
+            transform: scale(1.1);
+        }
+
+        /* 비디오 팝업 모달 */
+        .video-modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100vw; height: 100vh;
+            background: rgba(10, 10, 10, 0.85);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            z-index: 99999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .video-modal-overlay.open {
             opacity: 1;
-            transform: translate(-50%, -50%) scale(1);
+            visibility: visible;
         }
 
-        .play-pause-overlay svg {
-            width: 40px;
-            height: 40px;
-            display: none;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+        .video-modal-content {
+            position: relative;
+            width: 85%;
+            max-width: 1400px;
+            transform: scale(0.95);
+            transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .play-pause-overlay.playing .play-icon {
+        .video-modal-overlay.open .video-modal-content {
+            transform: scale(1);
+        }
+
+        .video-modal-content video {
+            width: 100%;
+            border-radius: 16px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+            outline: none;
+            background: black;
+        }
+
+        .video-modal-close {
+            position: absolute;
+            top: -50px;
+            right: 0;
+            background: none;
+            border: none;
+            color: white;
+            font-size: 40px;
+            cursor: pointer;
+            transition: transform 0.3s;
+            line-height: 1;
+        }
+
+        .video-modal-close:hover {
+            transform: rotate(90deg) scale(1.2);
+            color: var(--accent-primary);
+        }
+
+        /* 5-3: 음료 제조 알고리즘 소개 */
+        .ingredient-process-container {
+            display: grid;
+            grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr);
+            gap: 42px;
+            width: 100%;
+            min-height: 660px;
+            align-items: center;
+        }
+
+        .ingredient-visual-panel {
+            position: relative;
+            border-radius: 28px;
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.58);
+            border: 1px solid rgba(138, 106, 74, 0.16);
+            box-shadow:
+                0 24px 56px rgba(92, 61, 33, 0.14),
+                inset 0 0 0 1px rgba(255, 255, 255, 0.5);
+        }
+
+        .ingredient-visual-panel img {
             display: block;
-            margin-left: 6px;
-            /* 삼각형이라 중앙 맞춤을 위해 추가 */
+            width: 100%;
+            height: 560px;
+            object-fit: contain;
+            border-radius: 18px;
+            background: rgba(247, 234, 213, 0.5);
         }
 
-        .play-pause-overlay.paused .pause-icon {
-            display: block;
+        .ingredient-caption {
+            position: absolute;
+            left: 34px;
+            bottom: 34px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            background: rgba(58, 42, 32, 0.78);
+            color: #fff7e8;
+            font-size: 18px;
+            font-weight: 800;
+            box-shadow: 0 10px 24px rgba(58, 42, 32, 0.24);
         }
+
+        .ingredient-text-panel {
+            display: flex;
+            flex-direction: column;
+            gap: 22px;
+        }
+
+        .ingredient-title {
+            margin: 0;
+            color: #3a2a20;
+            font-size: 48px;
+            font-weight: 900;
+            line-height: 1.08;
+            letter-spacing: 0;
+        }
+
+        .ingredient-subtitle {
+            margin: 0;
+            color: #5b8d62;
+            font-size: 24px;
+            font-weight: 900;
+            line-height: 1.34;
+        }
+
+        .ingredient-step-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .ingredient-step {
+            padding: 22px 24px;
+            border-radius: 18px;
+            background: rgba(255, 248, 238, 0.84);
+            border: 1px solid rgba(138, 106, 74, 0.16);
+            box-shadow: 0 14px 30px rgba(92, 61, 33, 0.08);
+        }
+
+        .ingredient-step h4 {
+            margin: 0 0 10px 0;
+            color: #2F4D38;
+            font-size: 27px;
+            font-weight: 900;
+            line-height: 1.18;
+        }
+
+        .ingredient-step p {
+            margin: 0;
+            color: #4A3B2C;
+            font-size: 20px;
+            font-weight: 750;
+            line-height: 1.48;
+        }
+
+        .ingredient-keywords {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .ingredient-keywords span {
+            padding: 9px 16px;
+            border-radius: 999px;
+            background: #E8F0E5;
+            color: #2F4D38;
+            font-size: 17px;
+            font-weight: 900;
+            border: 1px solid rgba(92, 141, 98, 0.22);
+        }
+
+        /* ===== 6페이지 시작: 개발 이슈 회고 CSS ===== */
+        #slide-6 {
+            position: relative;
+            overflow: hidden;
+            padding: 64px 92px;
+            background:
+                radial-gradient(circle at 16% 18%, rgba(255, 255, 255, 0.74), transparent 30%),
+                radial-gradient(circle at 84% 12%, rgba(155, 184, 151, 0.28), transparent 34%),
+                radial-gradient(circle at 46% 96%, rgba(205, 151, 94, 0.18), transparent 38%),
+                linear-gradient(135deg, #f3eadb 0%, #eee6d7 46%, #e7eee4 100%);
+        }
+
+        #slide-6::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(92, 61, 33, 0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(92, 61, 33, 0.055) 1px, transparent 1px);
+            background-size: 54px 54px;
+            mask-image: radial-gradient(circle at center, black 0 58%, transparent 88%);
+            opacity: 0.32;
+            pointer-events: none;
+        }
+
+        #slide-6::after {
+            content: "";
+            position: absolute;
+            width: 580px;
+            height: 580px;
+            right: -170px;
+            top: -210px;
+            border-radius: 50%;
+            background: #e7eee4;
+            border: 1px solid rgba(255, 255, 255, 0.54);
+            box-shadow:
+                34px 34px 72px rgba(126, 112, 91, 0.17),
+                -34px -34px 72px rgba(255, 255, 255, 0.68),
+                inset 18px 18px 44px rgba(126, 112, 91, 0.08),
+                inset -18px -18px 44px rgba(255, 255, 255, 0.50);
+            pointer-events: none;
+        }
+
+        .issue-retro-grid {
+            position: relative;
+            z-index: 1;
+            display: grid;
+            grid-template-columns: minmax(0, 0.98fr) minmax(0, 1.02fr);
+            gap: 34px;
+            width: 100%;
+            height: 100%;
+            align-items: center;
+        }
+
+        .issue-photo-field {
+            position: relative;
+            min-height: 760px;
+            perspective: 1200px;
+        }
+
+        .issue-photo-field::before {
+            content: "";
+            position: absolute;
+            left: 110px;
+            top: 130px;
+            width: 650px;
+            height: 520px;
+            border-radius: 44% 56% 48% 52%;
+            background: rgba(238, 230, 215, 0.58);
+            box-shadow:
+                inset 28px 28px 64px rgba(118, 101, 80, 0.12),
+                inset -28px -28px 64px rgba(255, 255, 255, 0.72),
+                22px 22px 58px rgba(121, 105, 83, 0.12),
+                -20px -20px 54px rgba(255, 255, 255, 0.58);
+            transform: rotate(-8deg);
+            pointer-events: none;
+        }
+
+        .issue-polaroid {
+            position: absolute;
+            width: var(--w);
+            left: var(--x);
+            top: var(--y);
+            padding: 14px;
+            border-radius: 24px;
+            background: linear-gradient(145deg, #fbf4e8, #e4dccd);
+            border: 1px solid rgba(255, 255, 255, 0.62);
+            box-shadow:
+                18px 18px 36px rgba(112, 96, 76, 0.18),
+                -16px -16px 34px rgba(255, 255, 255, 0.72),
+                inset 1px 1px 0 rgba(255, 255, 255, 0.82),
+                inset -1px -1px 0 rgba(132, 114, 91, 0.08);
+            transform: rotate(var(--r)) translate3d(0, 0, var(--z));
+            animation: issueFloat var(--d) ease-in-out infinite alternate;
+            overflow: hidden;
+        }
+
+        .issue-polaroid::after {
+            content: "";
+            position: absolute;
+            inset: 10px;
+            border-radius: 18px;
+            box-shadow:
+                inset 0 0 0 1px rgba(255, 255, 255, 0.56),
+                inset 0 -30px 46px rgba(74, 59, 44, 0.08);
+            pointer-events: none;
+        }
+
+        .issue-polaroid img {
+            width: 100%;
+            height: var(--h);
+            object-fit: contain;
+            object-position: center center;
+            display: block;
+            border-radius: 16px;
+            background:
+                linear-gradient(45deg, rgba(255, 255, 255, 0.75) 25%, transparent 25%),
+                linear-gradient(-45deg, rgba(255, 255, 255, 0.75) 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, rgba(255, 255, 255, 0.75) 75%),
+                linear-gradient(-45deg, transparent 75%, rgba(255, 255, 255, 0.75) 75%),
+                #ece4d7;
+            background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+            background-size: 24px 24px;
+            box-shadow:
+                inset 9px 9px 18px rgba(122, 104, 82, 0.10),
+                inset -9px -9px 18px rgba(255, 255, 255, 0.74);
+            filter: saturate(0.95) contrast(1.02);
+            opacity: 1;
+            transform: scale(1);
+            transition:
+                opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+                filter 0.85s ease;
+        }
+
+        .issue-polaroid.is-switching img {
+            opacity: 0;
+            transform: scale(1.035);
+            filter: saturate(0.72) contrast(0.96) blur(2px);
+        }
+
+        .issue-polaroid.hero {
+            z-index: 6;
+            width: 560px;
+            left: 190px;
+            top: 198px;
+            transform: rotate(-2.8deg) translateZ(120px);
+            box-shadow:
+                28px 28px 58px rgba(103, 86, 68, 0.22),
+                -26px -26px 52px rgba(255, 255, 255, 0.72),
+                inset 1px 1px 0 rgba(255, 255, 255, 0.88),
+                inset -1px -1px 0 rgba(132, 114, 91, 0.10);
+        }
+
+        .issue-polaroid.hero img {
+            height: 350px;
+        }
+
+        .issue-content-panel {
+            position: relative;
+            min-height: 760px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .issue-title-block {
+            position: relative;
+            padding-left: 6px;
+        }
+
+        .issue-title-block .section-kicker {
+            margin-bottom: 10px;
+        }
+
+        .issue-title {
+            margin: 0;
+            color: #3a2a20;
+            font-size: 70px;
+            font-weight: 950;
+            line-height: 1.02;
+            letter-spacing: 0;
+        }
+
+        .issue-subtitle {
+            margin: 16px 0 0;
+            max-width: 660px;
+            color: #5b8d62;
+            font-size: 25px;
+            font-weight: 900;
+            line-height: 1.38;
+        }
+
+        .issue-carousel-shell {
+            position: relative;
+            height: 468px;
+            overflow: hidden;
+            border-radius: 36px;
+            padding: 12px;
+            background: linear-gradient(145deg, #f8f1e6, #e3dbcc);
+            box-shadow:
+                18px 18px 38px rgba(111, 95, 76, 0.16),
+                -18px -18px 38px rgba(255, 255, 255, 0.74),
+                inset 5px 5px 12px rgba(111, 95, 76, 0.08),
+                inset -5px -5px 12px rgba(255, 255, 255, 0.62);
+        }
+
+        .issue-carousel-track {
+            display: flex;
+            width: 100%;
+            height: 100%;
+            transition: transform 0.82s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .issue-card {
+            flex: 0 0 100%;
+            width: 100%;
+            min-width: 100%;
+            max-width: 100%;
+            box-sizing: border-box;
+            display: grid;
+            grid-template-rows: auto auto auto;
+            align-content: center;
+            gap: 24px;
+            padding: 44px 50px;
+            border-radius: 30px;
+            background:
+                radial-gradient(circle at 90% 12%, rgba(92, 141, 98, 0.12), transparent 32%),
+                linear-gradient(145deg, #fff9ed, #ebe2d2);
+            border: 1px solid rgba(255, 255, 255, 0.72);
+            box-shadow:
+                inset 8px 8px 18px rgba(126, 109, 88, 0.08),
+                inset -8px -8px 18px rgba(255, 255, 255, 0.72);
+        }
+
+        .issue-card-label {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #c87a41;
+            font-size: 18px;
+            font-weight: 950;
+        }
+
+        .issue-card-label::before {
+            content: "";
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #d28a4a;
+            box-shadow:
+                4px 4px 9px rgba(108, 87, 66, 0.20),
+                -4px -4px 9px rgba(255, 255, 255, 0.76),
+                0 0 0 7px rgba(200, 122, 65, 0.12);
+        }
+
+        .issue-card h3 {
+            margin: 0;
+            color: #2F4D38;
+            font-size: 34px;
+            font-weight: 950;
+            line-height: 1.16;
+        }
+
+        .issue-card p {
+            margin: 0;
+            color: #4A3B2C;
+            font-size: 20px;
+            font-weight: 800;
+            line-height: 1.52;
+        }
+
+        .issue-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .issue-tags span {
+            padding: 9px 15px;
+            border-radius: 999px;
+            background: linear-gradient(145deg, #f4f0e6, #dfe9dc);
+            color: #2F4D38;
+            border: 1px solid rgba(255, 255, 255, 0.64);
+            box-shadow:
+                5px 5px 10px rgba(114, 101, 84, 0.12),
+                -5px -5px 10px rgba(255, 255, 255, 0.70);
+            font-size: 16px;
+            font-weight: 950;
+        }
+
+        .issue-carousel-nav {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            min-height: 40px;
+        }
+
+        .issue-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(58, 42, 32, 0.22);
+            padding: 0;
+            transition: width 0.35s ease, background 0.35s ease;
+        }
+
+        .issue-dot.active {
+            width: 42px;
+            border-radius: 999px;
+            background: #5b8d62;
+        }
+
+        .issue-progress {
+            flex: 1;
+            height: 3px;
+            border-radius: 999px;
+            background: rgba(58, 42, 32, 0.12);
+            overflow: hidden;
+        }
+
+        .issue-progress-fill {
+            display: block;
+            height: 100%;
+            width: 20%;
+            background: linear-gradient(90deg, #c87a41, #5b8d62);
+            border-radius: inherit;
+            transition: width 0.5s ease;
+        }
+
+        @keyframes issueFloat {
+            from {
+                translate: 0 0;
+            }
+            to {
+                translate: 0 -18px;
+            }
+        }
+
+        /* ===== 6페이지 끝: 개발 이슈 회고 CSS ===== */
 
         @keyframes blinkCursor {
 
@@ -1625,6 +2116,111 @@
             50% {
                 border-color: var(--accent-primary)
             }
+        }
+    
+        /* 8페이지 3D 캐러셀 스타일 */
+        .carousel-3d-container {
+            perspective: 1500px;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        .carousel-3d-card {
+            position: absolute;
+            width: 500px;
+            height: 650px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            border-radius: 25px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+            padding: 50px 40px;
+            transition: all 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+            transform-style: preserve-3d;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .carousel-3d-card.active {
+            transform: translateX(0) scale(1) translateZ(0);
+            opacity: 1;
+            z-index: 10;
+        }
+
+        .carousel-3d-card.prev {
+            transform: translateX(-450px) scale(0.85) translateZ(-300px) rotateY(25deg);
+            opacity: 0.5;
+            z-index: 5;
+        }
+
+        .carousel-3d-card.next {
+            transform: translateX(450px) scale(0.85) translateZ(-300px) rotateY(-25deg);
+            opacity: 0.5;
+            z-index: 5;
+        }
+
+        .carousel-3d-card.hidden-left {
+            transform: translateX(-800px) scale(0.6) translateZ(-600px) rotateY(40deg);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .carousel-3d-card.hidden-right {
+            transform: translateX(800px) scale(0.6) translateZ(-600px) rotateY(-40deg);
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .card-member-name {
+            font-size: 2.5em;
+            font-weight: 800;
+            color: var(--accent-primary);
+            border-bottom: 4px solid var(--accent-secondary);
+            padding-bottom: 15px;
+            text-align: center;
+            margin-bottom: 10px;
+            letter-spacing: 0.1em;
+        }
+        
+        .card-section h3 {
+            font-size: 1.4em;
+            color: var(--text-main);
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .card-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .card-section li {
+            font-size: 1.15em;
+            line-height: 1.6;
+            color: var(--text-muted);
+            position: relative;
+            padding-left: 25px;
+            word-break: keep-all;
+        }
+
+        .card-section li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: var(--accent-secondary);
+            font-weight: bold;
+            font-size: 1.2em;
         }
     </style>
 </head>
@@ -1744,6 +2340,10 @@
                                     <span class="task-title">UGS</span>
                                     <span class="task-detail">로그인, 리더보드</span>
                                 </li>
+                                <li>
+                                    <span class="task-title">로그인 씬 연출</span>
+                                    <span class="task-detail">Timeline, Cinemachine 사용</span>
+                                </li>
                             </ol>
                         </article>
 
@@ -1753,11 +2353,25 @@
                                 <span class="member-role">XR &amp; LEVEL</span>
                             </div>
                             <ol class="member-tasks">
-                                <li><span class="task-title">아이스메이커 시스템 기능(일정간격 얼음 생성, 일정 위치 이상 생성 되면 멈춤)</span></li>
-                                <li><span class="task-title">아이스-컵 인터렉션 구현(그랩인터렉션, 소켓인터렉션, )</span></li>
-                                <li><span class="task-title">주문완료 시스템 구현(아이스 많이/적게 평가)</span></li>
-                                <li><span class="task-title">카페 맵 디자인(AI 3D모델 - 유니티)</span></li>
-                                <li><span class="task-title">평가시스템(종합 점수 계산) 및 시각화 UI 제작(예정)</span></li>
+                                <li>
+                                    <span class="task-title">아이스메이커 시스템 기능 구현</span>
+                                    <span class="task-detail">- 일정 시간 간격으로 얼음 생성<br>- 아이스박스 내부 얼음 수량에 따라 생성 자동 제어</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">아이스-컵 인터랙션 구현</span>
+                                    <span class="task-detail">- 스쿠퍼를 이용한 얼음 담기 및 컵에 넣기<br>- 스쿠퍼 기울기에 따른 얼음 배출 기능 구현</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">주문 완료 시스템 구현</span>
+                                    <span class="task-detail">- 주문대에 컵 배치 시 주문 완료 처리<br>- 얼음 개수 기반 주문 평가(많이/적게)</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">카페 환경 제작</span>
+                                    <span class="task-detail">- AI 기반 3D 모델 활용<br>- Unity 환경 내 카페 맵 구성</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">평가 시스템 및 UI 제작(예정)</span>
+                                </li>
                             </ol>
                         </article>
                     </div>
@@ -1830,9 +2444,15 @@
         <!-- Slide 5: 주요 기능 구현 (서브페이지 캐러셀 지원) -->
         <div class="slide" id="slide-5">
             <div class="flowchart-content">
-                <header>
-                    <p class="section-kicker">KEY FEATURES</p>
-                    <h2 class="members-title" style="font-size: 66px; margin-bottom: 24px;">주요 기능 구현</h2>
+                <header style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+                    <div>
+                        <p class="section-kicker">KEY FEATURES</p>
+                        <h2 class="members-title" style="font-size: 66px; margin: 0;">주요 기능 구현</h2>
+                    </div>
+                    <div id="slide5-sub2-header-extras" style="text-align: right; opacity: 0; transition: opacity 0.6s ease; padding-bottom: 8px;">
+                        <h3 class="server-title" style="font-size: 36px; font-weight: 900; color: #3a2a20; margin: 0 0 6px 0; text-shadow: 0 2px 5px rgba(255,255,255,0.8);">냥냥 AI 서버</h3>
+                        <blockquote class="server-quote" style="font-size: 16px; font-style: italic; color: var(--accent-secondary); margin: 0; padding-left: 12px; border-left: 4px solid var(--accent-secondary); font-weight: 800; display: inline-block;">"API 키 과금 없이, 아카데미 노트북 2대만으로 구현한 실시간 AI NPC"</blockquote>
+                    </div>
                 </header>
 
                 <!-- 5-1: 플로우 차트 서브 페이지 -->
@@ -1850,66 +2470,442 @@
                     </div>
                 </div>
 
-                <!-- 5-2: 냥냥 AI 서버 소개 서브 페이지 -->
+                <!-- 5-2: 냥냥 AI 서버 소개 서브 페이지 (새 레이아웃) -->
                 <div class="slide5-sub-page" id="slide5-sub-2">
-                    <div class="server-intro-container">
-                        <!-- 왼쪽: 기술 텍스트 카드 -->
-                        <div class="server-text-column">
-                            <h3 class="server-title">냥냥 AI 서버</h3>
-                            <blockquote class="server-quote">"API 키 과금 없이, 아카데미 노트북 2대만으로 구현한 실시간 AI NPC"</blockquote>
-
-                            <div class="server-cards-list">
-                                <div class="server-tech-card">
-                                    <h4>1. 2초 미만의 저지연 (Low-Latency)</h4>
-                                    <ul>
-                                        <li><strong>VRAM 8GB 최적화</strong></li>
-                                        <li><strong>다이렉트 바이너리 통신</strong></li>
-                                        <li><strong>하드웨어 에코 차단</strong></li>
-                                        <li><strong>실시간 친절도 평가</strong></li>
-                                        <li><strong>팀원 친화적인 편리한 원클릭 기능들</strong></li>
+                    <div class="server-intro-container-v2">
+                        <!-- 캐러셀 영역 -->
+                        <div class="server-carousel-column-v2" id="carousel-viewport-v2">
+                            <div class="server-carousel-track-v2" id="carousel-track-v2">
+                                <!-- 카드 1 -->
+                                <div class="server-card-v2">
+                                    <h4>1. 로컬에서 작동하는 2초 미만의 저지연 (Low-Latency) 실시간 대화</h4>
+                                    <ul>                                        
+                                        <li><strong>다이렉트 바이너리 통신</strong>: HTTP/Base64 변환을 생략한 순수 바이너리 웹소켓 전송</li>
+                                        <li><strong>하드웨어 에코 차단</strong>: AI 발화(TTS) 시 STT 마이크를 강제 닫아 하울링 루프 원천 방지</li>
+                                        <li><strong>실시간 친절도 평가</strong>: 유저의 응대 태도에 따라 실시간 AI 응대 점수 계산</li>
+                                        <li><strong>5명의 특색있는 페르소나</strong>: 개그우먼, 틱톡커, 외국인 등</li>
+                                        <li><strong>팀원 친화적인 다양한 원클릭 기능</strong>: 백엔드 서버 코드 적용시 발생할 수 있는 트러블 슈팅 완벽 해결</li>
                                     </ul>
                                 </div>
-                                <div class="server-tech-card">
+                                <!-- 카드 2 -->
+                                <div class="server-card-v2">
                                     <h4>2. 감정이 살아있는 표현력 (Emotion)</h4>
                                     <ul>
-                                        <li><strong>감정 음성 합성</strong>: 슈퍼톤 음성 엔진을 통해 LLM 출력 동시에 숨소리, 감탄사 TTS 합성</li>
+                                        <li><strong>감정 음성 합성</strong>: 슈퍼톤 음성 엔진을 통해 텍스트와 동시에 숨소리, 감탄사 합성</li>
                                     </ul>
                                 </div>
-                                <div class="server-tech-card">
+                                <!-- 카드 3 -->
+                                <div class="server-card-v2">
                                     <h4>3. 기기 2대의 로컬 분산 처리 (Distributed)</h4>
                                     <ul>
                                         <li><strong>역할 분담</strong>: 노트북 A(VR 렌더링 & STT) ↔ 노트북 B(LLM & TTS 연산) 이원화</li>
                                         <li><strong>오토 디스커버리</strong>: 번거로운 IP 입력 없이 원클릭 자동 연결 및 소켓 페어링</li>
                                     </ul>
+                                    <div class="highlight-box-v2">
+                                        <strong style="color: #c87a41; font-size: 22px; display: block; margin-bottom: 8px;">🔥 LLM-TTS 메모리 밸런싱 최적화</strong>
+                                        8GB VRAM이라는 제한된 환경에서 최적의 성능을 끌어내기 위해 20개가 넘는 LLM 모델들을 일일이 성능 테스트하며 치열한 R&D를 진행했습니다. 이를 바탕으로 LLM과 TTS가 동시에 안정적으로 동작하도록 GPU 레이어, 컨텍스트 크기, 배치/마이크로배치, KV 캐시 양자화, TTS GPU Provider, 워밍업 순서를 직접 조정했습니다. 1주일 넘게 밤샘 작업하며 VRAM 충돌, 첫 응답 지연, CPU 폴백 문제를 해결했고, 실시간 대화와 음성 합성이 끊기지 않도록 메모리 사용 흐름을 세밀하게 최적화했습니다.
+                                    </div>
                                 </div>
                             </div>
                         </div>
 
-                        <!-- 오른쪽: 데모 비디오 프레임 -->
-                        <div class="server-video-column">
-                            <div class="video-frame-wrapper">
-                                <video src="유니티images/5페이지/냥냥ai서버.mp4" loop playsinline></video>
-                                <div class="play-pause-overlay">
-                                    <svg class="play-icon" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M8 5v14l11-7z" />
-                                    </svg>
-                                    <svg class="pause-icon" viewBox="0 0 24 24">
-                                        <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z" />
-                                    </svg>
+                        <!-- 플로팅 썸네일 -->
+                        <div class="floating-video-thumbnail" id="open-video-modal-btn">
+                            <div class="live-badge" style="position: absolute; top: 12px; left: 12px; background: rgba(255, 60, 60, 0.9); color: white; padding: 4px 10px; border-radius: 8px; font-weight: 800; font-size: 12px; z-index: 10; display: flex; align-items: center; gap: 4px;"><span style="width: 6px; height: 6px; background: white; border-radius: 50%; display: inline-block; animation: blinkCursor 1s infinite;"></span>LIVE</div>
+                            <video src="유니티images/5페이지/냥냥ai서버.mp4" muted loop playsinline></video>
+                            <div class="play-overlay">
+                                <div class="play-btn">
+                                    <svg width="30" height="30" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>
                                 </div>
-
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- ===== 5-3 시작: 음료 제조 알고리즘 서브 페이지 ===== -->
+                <div class="slide5-sub-page" id="slide5-sub-3">
+                    <div class="ingredient-process-container">
+                        <div class="ingredient-visual-panel">
+                            <!-- 나중에 GIF로 교체할 때는 아래 src만 변경하면 됩니다. -->
+                            <img src="유니티images/5페이지/물_우유_시럽.png" alt="물, 우유, 시럽 제조 과정">
+                            <div class="ingredient-caption">Water · Milk · Syrup</div>
+                        </div>
+
+                        <div class="ingredient-text-panel">
+                            <p class="section-kicker" style="margin-bottom: 0;">DRINK SYSTEM</p>
+                            <h3 class="ingredient-title">음료 제조 로직 구현</h3>
+                            <p class="ingredient-subtitle">컵 안의 재료량과 액체 높이를 실시간으로 계산해 제조 과정을 시각화.</p>
+
+                            <div class="ingredient-step-list">
+                                <section class="ingredient-step">
+                                    <h4>1. 재료 관리 알고리즘</h4>
+                                    <p>컵 내부에 들어간 물, 우유, 시럽의 양을 Dictionary로 기록해 음료 제조 상태를 추적.</p>
+                                </section>
+
+                                <section class="ingredient-step">
+                                    <h4>2. 액체 높이 시각화</h4>
+                                    <p>현재 음료량을 기준으로 컵 속 액체 높이를 계산하고, 높이 증가량의 절반만큼 Y축 위치를 보정해 자연스럽게 차오르는 효과 구현</p>
+                                </section>
+                            </div>
+
+                            <div class="ingredient-keywords">
+                                <span>Dictionary 기반 재료 추적</span>
+                                <span>실시간 높이 계산</span>
+                                <span>Y축 위치 보정</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ===== 5-3 끝 ===== -->
+
+                <!-- ===== 5-4 시작: 포타필터 탬핑, 에스프레소 샷, 스팀 서브 페이지 ===== -->
+                <div class="slide5-sub-page" id="slide5-sub-4">
+                    <div class="ingredient-process-container">
+                        <div class="ingredient-visual-panel">
+                            <!-- 나중에 GIF로 교체할 때는 아래 src만 변경하면 됩니다. -->
+                            <img src="유니티images/5페이지/포타필터 탭핑 에스프레소 샷 스팀.png" alt="포타필터 탬핑, 에스프레소 샷, 스팀 구현 과정">
+                            <div class="ingredient-caption">Portafilter · Shot · Steam</div>
+                        </div>
+
+                        <div class="ingredient-text-panel">
+                            <p class="section-kicker" style="margin-bottom: 0;">XR INTERACTION</p>
+                            <h3 class="ingredient-title">에스프레소 머신 상호작용</h3>
+                            <p class="ingredient-subtitle">포타필터 장착부터 버튼 입력까지 XR Interaction Toolkit 이벤트로 연결.</p>
+
+                            <div class="ingredient-step-list">
+                                <section class="ingredient-step">
+                                    <h4>1. XRSocketInteractor 감지</h4>
+                                    <p>에스프레소 머신 소켓에 포타필터가 닿으면 selectEntered 이벤트를 받고, 대상이 포타필터인지 한 번 더 확인해 장착을 처리.</p>
+                                </section>
+
+                                <section class="ingredient-step">
+                                    <h4>2. VR 버튼 입력 구현</h4>
+                                    <p>XR Poke Interactor로 탬핑, 샷 추출, 스팀 버튼을 구성. 버튼 반응성은 추가 개선이 필요한 부분으로 정리.</p>
+                                </section>
+                            </div>
+
+                            <div class="ingredient-keywords">
+                                <span>Socket 이벤트</span>
+                                <span>포타필터 검증</span>
+                                <span>VR 버튼 입력</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ===== 5-4 끝 ===== -->
+
+                <!-- ===== 5-5 시작: 아이스 메이커 서브 페이지 ===== -->
+                <div class="slide5-sub-page" id="slide5-sub-5">
+                    <div class="ingredient-process-container">
+                        <div class="ingredient-visual-panel">
+                            <!-- 나중에 GIF로 교체할 때는 아래 src만 변경하면 됩니다. -->
+                            <img src="유니티images/5페이지/아이스메이커.png" alt="아이스 메이커와 얼음 담기 시스템">
+                            <div class="ingredient-caption">Ice Maker · Scooper · Cup</div>
+                        </div>
+
+                        <div class="ingredient-text-panel">
+                            <p class="section-kicker" style="margin-bottom: 0;">ICE SYSTEM</p>
+                            <h3 class="ingredient-title">얼음 담기와 주문 평가</h3>
+                            <p class="ingredient-subtitle">스쿠퍼 조작, 얼음 이동, 주문 완료 평가까지 하나의 제조 흐름으로 구현.</p>
+
+                            <div class="ingredient-step-list">
+                                <section class="ingredient-step">
+                                    <h4>1. 얼음 푸기 및 담기</h4>
+                                    <p>Grab Interactable로 스쿠퍼를 직접 집고, Socket Interactor로 내부에 얼음이 담기게 구성. 스쿠퍼가 기울어지면 소켓을 해제해 얼음이 컵으로 떨어지도록 제작.</p>
+                                </section>
+
+                                <section class="ingredient-step">
+                                    <h4>2. 주문 완료 및 평가</h4>
+                                    <p>완성 컵을 주문대에 올리면 주문이 자동 완료되고, 컵 안의 얼음 개수를 기준과 비교해 많음, 적음, 적정 여부를 판별.</p>
+                                </section>
+                            </div>
+
+                            <div class="ingredient-keywords">
+                                <span>Grab Interactable</span>
+                                <span>Socket 해제</span>
+                                <span>얼음 개수 평가</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ===== 5-5 끝 ===== -->
+
+                <!-- ===== 5-6 시작: 커피 그라인더 서브 페이지 ===== -->
+                <div class="slide5-sub-page" id="slide5-sub-6">
+                    <div class="ingredient-process-container">
+                        <div class="ingredient-visual-panel">
+                            <!-- 나중에 GIF로 교체할 때는 아래 src만 변경하면 됩니다. -->
+                            <img src="유니티images/5페이지/그라인더.png" alt="커피 그라인더와 포타필터 원두 분쇄 연출">
+                            <div class="ingredient-caption">Grinder · Haptic · Particle</div>
+                        </div>
+
+                        <div class="ingredient-text-panel">
+                            <p class="section-kicker" style="margin-bottom: 0;">GRINDER SYSTEM</p>
+                            <h3 class="ingredient-title">커피 그라인더 연출 구현</h3>
+                            <p class="ingredient-subtitle">포타필터 장착, 분쇄 사운드, 햅틱 진동, 원두 파티클을 한 번의 상호작용으로 묶음.</p>
+
+                            <div class="ingredient-step-list">
+                                <section class="ingredient-step">
+                                    <h4>1. 자석식 포타필터 장착</h4>
+                                    <p>포타필터를 그라인더 소켓에 가져가면 자동으로 고정되도록 구성해 실제 장비에 끼우는 느낌을 구현.</p>
+                                </section>
+
+                                <section class="ingredient-step">
+                                    <h4>2. 분쇄 피드백과 재장착 방지</h4>
+                                    <p>버튼 입력 시 분쇄 소리, 햅틱 진동, 원두 파티클 누적 연출을 실행. 원두가 채워진 뒤에는 다시 장착되지 않도록 상태를 코드로 제어.</p>
+                                </section>
+                            </div>
+
+                            <div class="ingredient-keywords">
+                                <span>자석 장착</span>
+                                <span>햅틱 피드백</span>
+                                <span>파티클 누적</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- ===== 5-6 끝 ===== -->
             </div>
         </div>
+
+        <!-- ===== 6페이지 시작: 개발 중 이슈사항 ===== -->
+        <div class="slide" id="slide-6">
+            <div class="issue-retro-grid">
+                <div class="issue-photo-field" aria-hidden="true">
+                    <article class="issue-polaroid hero" style="--d: 5.8s;">
+                        <img src="유니티images/6페이지/01.png" alt="">
+                    </article>
+                    <article class="issue-polaroid" style="--w: 285px; --h: 180px; --x: 22px; --y: 64px; --r: -9deg; --z: 20px; --d: 4.8s;">
+                        <img src="유니티images/6페이지/02.png" alt="">
+                    </article>
+                    <article class="issue-polaroid" style="--w: 250px; --h: 168px; --x: 492px; --y: 32px; --r: 8deg; --z: 60px; --d: 5.4s;">
+                        <img src="유니티images/6페이지/03.png" alt="">
+                    </article>
+                    <article class="issue-polaroid" style="--w: 300px; --h: 190px; --x: 42px; --y: 430px; --r: 7deg; --z: 40px; --d: 6.2s;">
+                        <img src="유니티images/6페이지/04.png" alt="">
+                    </article>
+                    <article class="issue-polaroid" style="--w: 260px; --h: 178px; --x: 548px; --y: 510px; --r: -7deg; --z: 35px; --d: 5.1s;">
+                        <img src="유니티images/6페이지/05.png" alt="">
+                    </article>
+                    <article class="issue-polaroid" style="--w: 220px; --h: 150px; --x: 300px; --y: 604px; --r: 5deg; --z: 10px; --d: 4.6s;">
+                        <img src="유니티images/6페이지/2d 느낌 ChatGPT Image 2026년 5월 30일 오전 02_32_42.png" alt="">
+                    </article>
+                </div>
+
+                <div class="issue-content-panel">
+                    <header class="issue-title-block">
+                        <p class="section-kicker">DEVELOPMENT RETROSPECTIVE</p>
+                        <h2 class="issue-title">개발 중<br>이슈사항</h2>
+                    </header>
+
+                    <div class="issue-carousel-shell">
+                        <div class="issue-carousel-track" id="issue-carousel-track">
+                            <article class="issue-card">
+                                <div class="issue-card-label">조예은</div>
+                                <h3>얼음 배출 물리 상호작용</h3>
+                                <p>스쿠퍼를 기울여도 얼음이 자연스럽게 배출되지 않거나 충돌로 인한 비정상 움직임 발생. 스쿠퍼 내부 얼음을 Socket 방식으로 관리하고, 특정 기울기 이상에서 소켓 해제 구조 구현.</p>
+                                <div class="issue-tags">
+                                    <span>Socket 관리</span>
+                                    <span>기울기 해제</span>
+                                    <span>중력 표현</span>
+                                </div>
+                            </article>
+
+                            <article class="issue-card">
+                                <div class="issue-card-label">조예은</div>
+                                <h3>물리 설정과 감도 조정</h3>
+                                <p>얼음, 스쿠퍼, 컵 간 충돌 판정과 인터랙션 감도 불안정. Collider, Rigidbody, 기울기 기준값 반복 조정으로 배출 시점과 사용자 경험 보정.</p>
+                                <div class="issue-tags">
+                                    <span>Collider</span>
+                                    <span>Rigidbody</span>
+                                    <span>Threshold Tuning</span>
+                                </div>
+                            </article>
+
+                            <article class="issue-card">
+                                <div class="issue-card-label">최재빈</div>
+                                <h3>AI 통신 메모리 한계</h3>
+                                <p>완전 양방향 통신과 끼어들기 구조에서 8GB 메모리 초과(OOM) 발생. 2초 미만 저지연과 쾌적한 대화 템포 유지를 위해 Half-Duplex 방식 채택.</p>
+                                <div class="issue-tags">
+                                    <span>8GB OOM</span>
+                                    <span>Low Latency</span>
+                                    <span>Half-Duplex</span>
+                                </div>
+                            </article>
+
+                            <article class="issue-card">
+                                <div class="issue-card-label">황인용</div>
+                                <h3>한글 ID 경험 유지</h3>
+                                <p>UGS 로그인 규정상 영문 ID 필수. 사용자 화면에는 '냥, 뀨, 멍, 잉' 한글 ID를 유지하고, 내부 전송 단계에서 영문 ID로 매핑하는 구조 구현.</p>
+                                <div class="issue-tags">
+                                    <span>UGS Login</span>
+                                    <span>한글 UX</span>
+                                    <span>내부 영문 매핑</span>
+                                </div>
+                            </article>
+
+                            <article class="issue-card">
+                                <div class="issue-card-label">정해륜</div>
+                                <h3>분리된 씬과 기능 연결</h3>
+                                <p>씬 분리로 충돌 문제는 감소했지만, 각자 제작한 기능을 하나의 플레이 흐름으로 연결하는 과정에서 난도 증가. 가상환경 실감 구현에 필요한 세부 요소 체감.</p>
+                                <div class="issue-tags">
+                                    <span>Scene Integration</span>
+                                    <span>Feature Merge</span>
+                                    <span>Realism Detail</span>
+                                </div>
+                            </article>
+
+
+                        </div>
+                    </div>
+
+                    <div class="issue-carousel-nav" aria-label="개발 이슈 캐러셀 상태">
+                        <button class="issue-dot active" type="button" data-issue-index="0" aria-label="이슈 1"></button>
+                        <button class="issue-dot" type="button" data-issue-index="1" aria-label="이슈 2"></button>
+                        <button class="issue-dot" type="button" data-issue-index="2" aria-label="황인용 이슈"></button>
+                        <button class="issue-dot" type="button" data-issue-index="3" aria-label="정해륜 이슈"></button>
+                        <button class="issue-dot" type="button" data-issue-index="4" aria-label="최재빈 이슈"></button>
+                        <div class="issue-progress"><span class="issue-progress-fill" id="issue-progress-fill"></span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- ===== 6페이지 끝 ===== -->
+        <!-- Slide 7: 시연 영상 -->
+        <div class="slide" id="slide-7" style="justify-content: center; align-items: center;">
+            <div class="glass-panel" style="width: 85%; max-width: 1500px; height: 85%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; margin: 0 auto;">
+                <h2 class="title" style="margin-bottom: 20px;">시연 영상</h2>
+                <div style="flex: 1; width: 100%; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative;" id="slide7-video-container">
+                    <video id="demo-video-7" src="유니티images/7페이지/시연연상.mp4" style="width: 100%; height: 100%; object-fit: contain;" preload="metadata"></video>
+                </div>
+            </div>
+        </div>
+        <!-- ===== 7페이지 끝 ===== -->
+
+        <!-- Slide 8: 팀원별 소감 -->
+        <div class="slide" id="slide-8" style="justify-content: center; align-items: center; padding: 0;">
+            <h2 class="title" style="position: absolute; top: 40px; left: 50%; transform: translateX(-50%); text-align: center; z-index: 20; text-shadow: 0 4px 20px rgba(255,255,255,0.8);">
+                팀원별 소감<br><span style="font-size: 0.4em; color: var(--text-muted); letter-spacing: 0.2em; font-weight: normal;">TEAM RETROSPECTIVE</span>
+            </h2>
+            
+            <div class="carousel-3d-container" id="carousel-8">
+                <!-- Card 1: 조예은 -->
+                <div class="carousel-3d-card active">
+                    <div class="card-member-name">조예은</div>
+                    <div class="card-section">
+                        <h3>💡 소감</h3>
+                        <ul>
+                            <li>XR Interactable Toolkit 사전 학습 및 적용 과정에서 깊은 배움을 얻음</li>
+                            <li>Git 활용 능력이 크게 향상되었으며, 기획과 파트 분배의 중요성을 체감함</li>
+                        </ul>
+                    </div>
+                    <div class="card-section">
+                        <h3>🚀 발전 방향</h3>
+                        <ul>
+                            <li>액체가 담긴 컵의 출렁임과 같은 <strong>정밀한 물리 상호작용</strong> 구현 희망</li>
+                            <li>멀티플레이어 기반의 본격적인 <strong>타이쿤 장르</strong>로의 게임 확장</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 4: 최재빈 -->
+                <div class="carousel-3d-card hidden-right">
+                    <div class="card-member-name">최재빈</div>
+                    <div class="card-section">
+                        <h3>💡 소감</h3>
+                        <ul>
+                            <li>소비자 눈높이에 맞춘 <strong>대화형 AI 에이전트 개발</strong>의 실무적 어려움과 보람 체감</li>
+                            <li>안정적인 프레임 확보와 저지연(Low-Latency)을 위해 Half-Duplex 최적화 선택</li>
+                        </ul>
+                    </div>
+                    <div class="card-section">
+                        <h3>🚀 발전 방향</h3>
+                        <ul>
+                            <li>대화형 AI 기술을 응용한 <strong>아바타 면접, 영어 회화, AI 스트리머</strong> 등 다목적 비즈니스 모델(BM) 창출</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 2: 황인용 -->
+                <div class="carousel-3d-card next">
+                    <div class="card-member-name">황인용</div>
+                    <div class="card-section">
+                        <h3>💡 소감</h3>
+                        <ul>
+                            <li>시뮬레이터 장르 특유의 디테일 구현 난이도와 중요성 체감</li>
+                            <li>명확한 명세서 작성이 팀 프로젝트 소통에 필수적임을 인식</li>
+                            <li>초기 기획 방향을 모두 담아내지 못한 점에 대한 아쉬움</li>
+                        </ul>
+                    </div>
+                    <div class="card-section">
+                        <h3>🚀 발전 방향</h3>
+                        <ul>
+                            <li>단순 시뮬레이터를 넘어, 복합적인 <strong>카페 운영(타이쿤) 시스템</strong> 도입 및 고도화</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Card 3: 정해륜 -->
+                <div class="carousel-3d-card hidden-right">
+                    <div class="card-member-name">정해륜</div>
+                    <div class="card-section">
+                        <h3>💡 소감</h3>
+                        <ul>
+                            <li>VR 환경 내 물리 기반 상호작용 및 시스템 통합 경험 축적</li>
+                            <li>단순 기능 구현을 넘어, <strong>현실감 있는 인터랙션 설계</strong>와 구조적 접근의 중요성 학습</li>
+                        </ul>
+                    </div>
+                    <div class="card-section">
+                        <h3>🚀 발전 방향</h3>
+                        <ul>
+                            <li>결과 중심 평가를 탈피하여, XR 장비(HMD/컨트롤러) 데이터를 활용한 <strong>사용자 동선 및 효율성 정량 분석</strong></li>
+                            <li>맞춤형 피드백을 제공하는 <strong>XR 직무 훈련 전문 콘텐츠</strong>로의 확장 도약</li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+        <!-- ===== 8페이지 끝 ===== -->
+
+        <!-- Slide 9: Q&A -->
+        <div class="slide" id="slide-9" style="justify-content: center; align-items: center;">
+            <div class="glass-panel" style="width: 80%; height: 60%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <h2 style="font-size: 5em; color: var(--accent-primary); margin-bottom: 20px; font-weight: 900; letter-spacing: 0.1em;">Q & A</h2>
+                <p style="font-size: 1.8em; color: var(--text-muted);">경청해 주셔서 감사합니다. 자유롭게 질문해 주세요!</p>
+            </div>
+        </div>
+        <!-- ===== 9페이지 끝 ===== -->
+
     </div>
 
-    <div class="nav-hint" id="nav-hint">&lt; 1 / 5 &gt;</div>
+    <div class="nav-hint" id="nav-hint">
+        <span class="nav-btn" id="nav-prev">&lt;</span>
+        <span id="nav-current">1 / 9</span>
+        <span class="nav-btn" id="nav-next">&gt;</span>
+    </div>
 
     <script src="유니티images/3페이지/slide3-images.js"></script>
     <script>
+        function updateSlide8Cards() {
+            const cards = document.querySelectorAll('#carousel-8 .carousel-3d-card');
+            cards.forEach((card, index) => {
+                card.className = 'carousel-3d-card'; // reset classes
+                if (index === slide8State) {
+                    card.classList.add('active');
+                } else if (index === slide8State - 1) {
+                    card.classList.add('prev');
+                } else if (index === slide8State + 1) {
+                    card.classList.add('next');
+                } else if (index < slide8State - 1) {
+                    card.classList.add('hidden-left');
+                } else if (index > slide8State + 1) {
+                    card.classList.add('hidden-right');
+                }
+            });
+        }
+
         // 16:9 비율 반응형 자동 맞춤 스크립트
         function resizePresentation() {
             const presentation = document.getElementById('presentation');
@@ -2041,7 +3037,7 @@
         }
 
         let currentSlideIndex = 1;
-        const totalSlides = 5;
+        const totalSlides = 9;
 
         let introState = 0; // 0: 초기(숨김), 1: 텍스트&메이드 등장, 2: 이후 슬라이드 이동
         let tocAutoTimer = null;
@@ -2050,6 +3046,181 @@
         let memberBgTimer = null;
         let memberBgIndex = 0;
         let memberCardIndex = 0;
+
+        let issueCardIndex = 0;
+        let issueAutoTimer = null;
+        let issuePhotoTimer = null;
+        let issuePhotoCursor = 0;
+
+        function sortIssuePhotoSource(a, b) {
+            const fileA = a.split('/').pop() || a;
+            const fileB = b.split('/').pop() || b;
+            const numberA = fileA.match(/^\d+(?=\.)/);
+            const numberB = fileB.match(/^\d+(?=\.)/);
+            if (numberA && numberB) {
+                return Number(numberA[0]) - Number(numberB[0]) || fileA.localeCompare(fileB, 'ko-KR');
+            }
+            if (numberA) return -1;
+            if (numberB) return 1;
+            return fileA.localeCompare(fileB, 'ko-KR', { numeric: true, sensitivity: 'base' });
+        }
+
+        const issuePhotoSources = [
+            "유니티images/6페이지/01.png",
+            "유니티images/6페이지/02.png",
+            "유니티images/6페이지/03.png",
+            "유니티images/6페이지/04.png",
+            "유니티images/6페이지/05.png",
+            "유니티images/6페이지/2d 느낌 ChatGPT Image 2026년 5월 30일 오전 02_32_42.png",
+            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오전 02_30_13.png",
+            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오전 02_51_45.png",
+            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오전 03_39_15.png",
+            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오후 01_41_11.png",
+            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오후 04_33_09.png",
+            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오후 05_13_52.png",
+            "유니티images/6페이지/ChatGPT Image 2026년 5월 31일 오후 05_18_36.png",
+            "유니티images/6페이지/ChatGPT Image 2026년 5월 31일 오후 06_02_11.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 023105.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 140805.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 140824.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 140841.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 140858.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 155537.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 155613.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 170714.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 170754.png",
+            "유니티images/6페이지/스크린샷 2026-05-30 203102.png",
+            "유니티images/6페이지/스크린샷 2026-05-31 175422.png",
+            "유니티images/6페이지/스크린샷 2026-05-31 215430.png",
+            "유니티images/6페이지/스크린샷 2026-06-03 141614.png",
+            "유니티images/6페이지/스크린샷 2026-06-03 144944.png",
+            "유니티images/6페이지/스크린샷 2026-06-07 130007.png",
+            "유니티images/6페이지/스크린샷 2026-06-07 130016.png",
+            "유니티images/6페이지/스크린샷 2026-06-07 130042.png",
+            "유니티images/6페이지/일반손님.png",
+            "유니티images/6페이지/진상손님.png",
+            "유니티images/6페이지/틱톡커.png",
+            "유니티images/6페이지/플레이어.png"
+        ].sort(sortIssuePhotoSource);
+
+        function showIssueCard(index, playSound = true) {
+            const cards = Array.from(document.querySelectorAll('#slide-6 .issue-card'));
+            const track = document.getElementById('issue-carousel-track');
+            const dots = Array.from(document.querySelectorAll('#slide-6 .issue-dot'));
+            const progressFill = document.getElementById('issue-progress-fill');
+            if (!track || cards.length === 0) return false;
+
+            const nextIndex = Math.max(0, Math.min(index, cards.length - 1));
+            if (playSound && issueCardIndex !== nextIndex) {
+                playPopSound();
+            }
+
+            issueCardIndex = nextIndex;
+            track.style.transform = `translateX(-${issueCardIndex * 100}%)`;
+
+            dots.forEach((dot, dotIndex) => {
+                dot.classList.toggle('active', dotIndex === issueCardIndex);
+            });
+
+            if (progressFill) {
+                progressFill.style.width = `${((issueCardIndex + 1) / cards.length) * 100}%`;
+            }
+
+            return true;
+        }
+
+        function nextIssueCard() {
+            const cards = Array.from(document.querySelectorAll('#slide-6 .issue-card'));
+            if (issueCardIndex < cards.length - 1) {
+                showIssueCard(issueCardIndex + 1);
+                return true;
+            }
+            return false;
+        }
+
+        function previousIssueCard() {
+            if (issueCardIndex > 0) {
+                showIssueCard(issueCardIndex - 1);
+                return true;
+            }
+            return false;
+        }
+
+        function startIssueCarousel() {
+            stopIssueCarousel();
+            showIssueCard(0, false);
+        }
+
+        function stopIssueCarousel() {
+            if (issueAutoTimer !== null) {
+                clearInterval(issueAutoTimer);
+                issueAutoTimer = null;
+            }
+        }
+
+        function restartIssueCarousel() {
+        }
+
+        function setIssuePhoto(polaroid, src) {
+            const img = polaroid.querySelector('img');
+            if (!img || !src || img.getAttribute('src') === src) return;
+            const nextImage = new Image();
+            nextImage.onload = () => {
+                polaroid.classList.add('is-switching');
+                setTimeout(() => {
+                    img.src = src;
+                    requestAnimationFrame(() => {
+                        polaroid.classList.remove('is-switching');
+                    });
+                }, 240);
+            };
+            nextImage.onerror = () => {
+                const failedIndex = issuePhotoSources.indexOf(src);
+                if (failedIndex >= 0) {
+                    issuePhotoSources.splice(failedIndex, 1);
+                    issuePhotoCursor = issuePhotoCursor % Math.max(issuePhotoSources.length, 1);
+                }
+            };
+            nextImage.src = src;
+        }
+
+        function primeIssuePhotos() {
+            document.querySelectorAll('#slide-6 .issue-polaroid img').forEach((img) => {
+                img.onerror = () => {
+                    const fallback = issuePhotoSources.find((src) => src !== img.getAttribute('src'));
+                    if (fallback) {
+                        const nextImage = new Image();
+                        nextImage.onload = () => { img.src = fallback; };
+                        nextImage.src = fallback;
+                    }
+                };
+            });
+        }
+
+        function rotateIssuePhotos() {
+            const slots = Array.from(document.querySelectorAll('#slide-6 .issue-polaroid'));
+            if (slots.length === 0 || issuePhotoSources.length === 0) return;
+            slots.forEach((slot, slotIndex) => {
+                const sourceIndex = (issuePhotoCursor + slotIndex) % issuePhotoSources.length;
+                setIssuePhoto(slot, issuePhotoSources[sourceIndex]);
+            });
+            issuePhotoCursor = (issuePhotoCursor + 1) % issuePhotoSources.length;
+        }
+
+        function startIssuePhotoRotator() {
+            stopIssuePhotoRotator();
+            primeIssuePhotos();
+            rotateIssuePhotos();
+            issuePhotoTimer = setInterval(rotateIssuePhotos, 2600);
+        }
+
+        function stopIssuePhotoRotator() {
+            if (issuePhotoTimer !== null) {
+                clearInterval(issuePhotoTimer);
+                issuePhotoTimer = null;
+            }
+        }
+
 
         function showMemberCard(index) {
             const cards = Array.from(document.querySelectorAll('#slide-3 .member-card'));
@@ -2255,29 +3426,42 @@
         }
 
         let slide5SubIndex = 1;
-        let slide5Sub2State = 0; // 0: clear, 1~3: cards, 4: video playing, 5: end
+        let slide5Sub2State = 0;
+        let slide7State = 0; // 0: paused, 1: playing
+        let slide8State = 0; // 0 to 3 for members // 0: clear, 1~3: cards, 4: video playing, 5: end
 
         function showSlide5SubPage(targetIndex, direction = 'next') {
+            const subPages = Array.from(document.querySelectorAll('#slide-5 .slide5-sub-page'));
             const sub1 = document.getElementById('slide5-sub-1');
             const sub2 = document.getElementById('slide5-sub-2');
-            if (!sub1 || !sub2) return;
+            const activeSub = subPages[targetIndex - 1];
+            if (!sub1 || !sub2 || !activeSub) return;
 
             // 5-2 서브페이지 진입/이탈 시 초기화 로직
+            const headerExtras = document.getElementById('slide5-sub2-header-extras');
             if (targetIndex === 2) {
+                if (headerExtras) headerExtras.style.opacity = '1';
                 slide5Sub2State = 0;
-                const cards = sub2.querySelectorAll('.server-tech-card');
+                const cards = sub2.querySelectorAll('.server-card-v2');
                 cards.forEach(card => {
-                    card.classList.remove('show');
-                    card.style.display = 'none';
+                    card.classList.remove('active');
                 });
-                const video = sub2.querySelector('video');
-                if (video) {
-                    video.pause();
-                    video.currentTime = 0;
-                }
+                const track = document.getElementById('carousel-track-v2');
+                if (track) track.style.transform = `translateY(0px)`;
+                const thumbVideo = sub2.querySelector('.floating-video-thumbnail video');
+                if (thumbVideo) thumbVideo.play();
             } else if (targetIndex === 1) {
-                const video = sub2.querySelector('video');
-                if (video) video.pause();
+                if (headerExtras) headerExtras.style.opacity = '0';
+                const thumbVideo = sub2.querySelector('.floating-video-thumbnail video');
+                if (thumbVideo) thumbVideo.pause();
+                const popupVideo = document.getElementById('server-popup-video');
+                if (popupVideo) popupVideo.pause();
+            } else if (targetIndex >= 3) {
+                if (headerExtras) headerExtras.style.opacity = '0';
+                const thumbVideo = sub2.querySelector('.floating-video-thumbnail video');
+                if (thumbVideo) thumbVideo.pause();
+                const popupVideo = document.getElementById('server-popup-video');
+                if (popupVideo) popupVideo.pause();
             }
 
             // 효과음 재생 (슬라이드가 바뀔 때만)
@@ -2285,13 +3469,15 @@
                 playPopSound();
             }
 
-            const activeSub = targetIndex === 1 ? sub1 : sub2;
-            const inactiveSub = targetIndex === 1 ? sub2 : sub1;
+            // duplicate removed
+            const inactiveSubs = subPages.filter(page => page !== activeSub);
 
             if (direction === 'next') {
                 // 뒤로 물러남 (exit-left)
-                inactiveSub.classList.remove('active', 'exit-right');
-                inactiveSub.classList.add('exit-left');
+                inactiveSubs.forEach(page => {
+                    page.classList.remove('active', 'exit-right');
+                    page.classList.add('exit-left');
+                });
 
                 // 오른쪽에서 진입
                 activeSub.classList.remove('exit-left');
@@ -2301,8 +3487,10 @@
                 activeSub.classList.add('active');
             } else {
                 // 앞으로 물러남 (exit-right)
-                inactiveSub.classList.remove('active', 'exit-left');
-                inactiveSub.classList.add('exit-right');
+                inactiveSubs.forEach(page => {
+                    page.classList.remove('active', 'exit-left');
+                    page.classList.add('exit-right');
+                });
 
                 // 왼쪽에서 진입
                 activeSub.classList.remove('exit-right');
@@ -2319,7 +3507,7 @@
                 startFlowchartTyping();
                 const video = sub2.querySelector('video');
                 if (video) video.pause();
-            } else {
+            } else if (targetIndex === 2) {
                 // 5-2면 타이핑 애니메이션 정지 (비디오는 스페이스바 순차 제어로만 재생)
                 if (typingTimer) {
                     clearInterval(typingTimer);
@@ -2336,6 +3524,13 @@
                     video.currentTime = 0;
                     video.pause();
                 }
+            } else {
+                if (typingTimer) {
+                    clearInterval(typingTimer);
+                    typingTimer = null;
+                }
+                const container = document.getElementById('flowchart-typing-text');
+                if (container) container.textContent = '';
             }
         }
 
@@ -2377,7 +3572,7 @@
             document.querySelectorAll('.slide').forEach(slide => slide.classList.remove('active'));
             document.getElementById(`slide-${index}`).classList.add('active');
             currentSlideIndex = index;
-            document.getElementById('nav-hint').innerText = `< ${index} / ${totalSlides} >`;
+            document.getElementById('nav-current').innerText = `${index} / ${totalSlides}`;
 
             if (index === 2) {
                 startTocAutoHighlight();
@@ -2391,6 +3586,31 @@
                 startMemberBackgroundRotator();
             } else {
                 stopMemberBackgroundRotator();
+            }
+
+            if (index === 6) {
+                startIssueCarousel();
+                startIssuePhotoRotator();
+            } else {
+                stopIssueCarousel();
+                stopIssuePhotoRotator();
+            }
+
+            if (index === 8) {
+                slide8State = 0;
+                updateSlide8Cards();
+            }
+
+            if (index === 7) {
+                slide7State = 0;
+                const video7 = document.getElementById('demo-video-7');
+                if (video7) {
+                    video7.pause();
+                    video7.currentTime = 0;
+                }
+            } else {
+                const video7 = document.getElementById('demo-video-7');
+                if (video7) video7.pause();
             }
 
             // 5페이지 플로우 차트 타이핑 및 서브페이지 세팅
@@ -2452,35 +3672,89 @@
                     if (slide5SubIndex === 1) {
                         showSlide5SubPage(2, 'next');
                     } else if (slide5SubIndex === 2) {
-                        const cards = document.querySelectorAll('#slide5-sub-2 .server-tech-card');
-                        const video = document.querySelector('#slide5-sub-2 video');
+                        const modal = document.getElementById('server-video-modal');
+                        if (modal && modal.classList.contains('open')) return; // 모달 열려있으면 스페이스바 무시
+
+                        const cards = document.querySelectorAll('#slide5-sub-2 .server-card-v2');
 
                         if (slide5Sub2State < cards.length) {
                             playPopSound();
-                            cards[slide5Sub2State].style.display = 'block';
-                            cards[slide5Sub2State].offsetHeight; // force reflow
-                            cards[slide5Sub2State].classList.add('show');
+
+                            cards.forEach(c => c.classList.remove('active'));
+                            const activeCard = cards[slide5Sub2State];
+                            activeCard.classList.add('active');
+
+                            const viewport = document.getElementById('carousel-viewport-v2');
+                            const track = document.getElementById('carousel-track-v2');
+
+                            if (viewport && track) {
+                                const cardTop = activeCard.offsetTop;
+                                const targetY = 100 - cardTop;
+
+                                track.style.transform = `translateY(${targetY}px)`;
+                            }
+
                             slide5Sub2State++;
                         } else if (slide5Sub2State === cards.length) {
-                            playPopSound();
-                            if (video) {
-                                video.play();
-                                const overlay = document.querySelector('#slide5-sub-2 .play-pause-overlay');
-                                if (overlay) {
-                                    overlay.classList.remove('playing', 'paused');
-                                    overlay.classList.add('playing', 'show');
-                                    setTimeout(() => overlay.classList.remove('show'), 800);
-                                }
+                            // 모달 열기
+                            const modal = document.getElementById('server-video-modal');
+                            if (modal) {
+                                if (typeof playPopSound === 'function') playPopSound();
+                                modal.classList.add('open');
                             }
                             slide5Sub2State++;
-                        } else if (slide5Sub2State > cards.length) {
-                            // 5-3 서브페이지 전환 자리 (현재는 5-3이 없으므로 다음 슬라이드로 넘어가게 처리)
-                            if (currentSlideIndex < totalSlides) {
-                                goToSlide(currentSlideIndex + 1);
+                        } else if (slide5Sub2State === cards.length + 1) {
+                            // 비디오 재생
+                            const popupVideo = document.getElementById('server-popup-video');
+                            if (popupVideo) {
+                                popupVideo.play();
                             }
+                            slide5Sub2State++;
+                        } else if (slide5Sub2State >= cards.length + 2) {
+                            // 서브페이지 이동 전 모달 닫기
+                            const modal = document.getElementById('server-video-modal');
+                            const popupVideo = document.getElementById('server-popup-video');
+                            if (modal && modal.classList.contains('open')) {
+                                modal.classList.remove('open');
+                                if (popupVideo) popupVideo.pause();
+                            }
+                            showSlide5SubPage(3, 'next');
+                        }
+                    } else if (slide5SubIndex >= 3 && slide5SubIndex < 6) {
+                        showSlide5SubPage(slide5SubIndex + 1, 'next');
+                    } else if (slide5SubIndex === 6) {
+                        if (currentSlideIndex < totalSlides) {
+                            goToSlide(currentSlideIndex + 1);
                         }
                     } else if (currentSlideIndex < totalSlides) {
                         goToSlide(currentSlideIndex + 1);
+                    }
+                } else if (currentSlideIndex === 6) {
+                    if (!nextIssueCard() && currentSlideIndex < totalSlides) {
+                        goToSlide(currentSlideIndex + 1);
+                    }
+                } else if (currentSlideIndex === 7) {
+                    const video7 = document.getElementById('demo-video-7');
+                    if (slide7State === 0) {
+                        if (video7) video7.play();
+                        slide7State = 1;
+                    } else if (slide7State === 1) {
+                        if (video7) {
+                            video7.pause();
+                        }
+                        if (currentSlideIndex < totalSlides) {
+                            goToSlide(currentSlideIndex + 1);
+                        }
+                    }
+                } else if (currentSlideIndex === 8) {
+                    if (slide8State < 3) {
+                        if (typeof playPopSound === 'function') playPopSound();
+                        slide8State++;
+                        updateSlide8Cards();
+                    } else {
+                        if (currentSlideIndex < totalSlides) {
+                            goToSlide(currentSlideIndex + 1);
+                        }
                     }
                 } else if (currentSlideIndex < totalSlides) {
                     // 1번 슬라이드 이후 일반적인 다음 슬라이드 전환
@@ -2494,32 +3768,80 @@
                         goToSlide(2);
                     }
                 } else if (currentSlideIndex === 5) {
-                    if (slide5SubIndex === 2) {
+                    if (slide5SubIndex > 3) {
+                        showSlide5SubPage(slide5SubIndex - 1, 'prev');
+                    } else if (slide5SubIndex === 3) {
+                        showSlide5SubPage(2, 'prev');
+                    } else if (slide5SubIndex === 2) {
                         if (slide5Sub2State > 0) {
-                            const cards = document.querySelectorAll('#slide5-sub-2 .server-tech-card');
-                            const video = document.querySelector('#slide5-sub-2 video');
+                            const cards = document.querySelectorAll('#slide5-sub-2 .server-card-v2');
+                            const modal = document.getElementById('server-video-modal');
+                            const popupVideo = document.getElementById('server-popup-video');
 
-                            if (slide5Sub2State === cards.length + 1) {
-                                if (video) {
-                                    video.pause();
-                                    video.currentTime = 0;
+                            if (slide5Sub2State === cards.length + 2) {
+                                // 비디오 재생 취소 (일시정지)
+                                if (popupVideo) {
+                                    popupVideo.pause();
+                                    popupVideo.currentTime = 0;
+                                }
+                                slide5Sub2State--;
+                            } else if (slide5Sub2State === cards.length + 1) {
+                                // 모달 닫기
+                                if (modal) {
+                                    modal.classList.remove('open');
+                                }
+                                if (popupVideo) {
+                                    popupVideo.pause();
                                 }
                                 slide5Sub2State--;
                             } else {
+                                // 캐러셀 이전 상태로
                                 slide5Sub2State--;
-                                cards[slide5Sub2State].classList.remove('show');
-                                // 트랜지션 후 none 처리
-                                setTimeout(() => {
-                                    if (!cards[slide5Sub2State].classList.contains('show')) {
-                                        cards[slide5Sub2State].style.display = 'none';
+                                cards.forEach(c => c.classList.remove('active'));
+                                
+                                if (slide5Sub2State > 0) {
+                                    const activeCard = cards[slide5Sub2State - 1];
+                                    activeCard.classList.add('active');
+                                    
+                                    const track = document.getElementById('carousel-track-v2');
+                                    if (track) {
+                                        const cardTop = activeCard.offsetTop;
+                                        const targetY = 100 - cardTop;
+                                        track.style.transform = `translateY(${targetY}px)`;
                                     }
-                                }, 500);
+                                } else {
+                                    const track = document.getElementById('carousel-track-v2');
+                                    if (track) track.style.transform = `translateY(0px)`;
+                                }
                             }
                         } else {
                             showSlide5SubPage(1, 'prev');
                         }
                     } else {
                         goToSlide(4);
+                    }
+                } else if (currentSlideIndex === 6) {
+                    if (!previousIssueCard()) {
+                        goToSlide(5);
+                    }
+                } else if (currentSlideIndex === 7) {
+                    if (slide7State === 1) {
+                        const video7 = document.getElementById('demo-video-7');
+                        if (video7) {
+                            video7.pause();
+                            video7.currentTime = 0;
+                        }
+                        slide7State = 0;
+                    } else {
+                        goToSlide(6);
+                    }
+                } else if (currentSlideIndex === 8) {
+                    if (slide8State > 0) {
+                        if (typeof playPopSound === 'function') playPopSound();
+                        slide8State--;
+                        updateSlide8Cards();
+                    } else {
+                        goToSlide(7);
                     }
                 } else if (currentSlideIndex === 2) {
                     // 2페이지에서 백스페이스 누르면 1페이지로 돌아감
@@ -2552,6 +3874,14 @@
                     goToSlide(4); // 2. 프로젝트 개요 -> 4페이지
                 } else if (index === 2) {
                     goToSlide(5); // 3. 주요 기능 구현 -> 5페이지
+                } else if (index === 3) {
+                    goToSlide(6); // 4. 개발 중 이슈사항 -> 6페이지
+                } else if (index === 4) {
+                    goToSlide(7); // 5. 시연영상 -> 7페이지
+                } else if (index === 5) {
+                    goToSlide(8); // 6. 팀원별 소감 -> 8페이지
+                } else if (index === 6) {
+                    goToSlide(9); // 7. Q&A -> 9페이지
                 }
             });
         });
@@ -2588,7 +3918,98 @@
                 });
             });
         });
+
+        // 비디오 모달 제어
+        document.addEventListener('DOMContentLoaded', () => {
+            const openBtn = document.getElementById('open-video-modal-btn');
+            const closeBtn = document.getElementById('close-video-modal-btn');
+            const modal = document.getElementById('server-video-modal');
+            const popupVideo = document.getElementById('server-popup-video');
+
+            if (openBtn && closeBtn && modal && popupVideo) {
+                openBtn.addEventListener('click', () => {
+                    if (typeof playPopSound === 'function') playPopSound();
+                    modal.classList.add('open');
+                    popupVideo.currentTime = 0;
+                    popupVideo.play();
+                });
+
+                const closeModal = () => {
+                    if (typeof playPopSound === 'function') playPopSound();
+                    modal.classList.remove('open');
+                    popupVideo.pause();
+                };
+
+                closeBtn.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+            }
+        });
+            // 5페이지 비디오 클릭 시 재생/일시정지 토글 기능 및 오버레이 애니메이션
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('#slide-6 .issue-dot').forEach(dot => {
+                dot.addEventListener('click', () => {
+                    const nextIndex = Number(dot.dataset.issueIndex || 0);
+                    showIssueCard(nextIndex);
+                    restartIssueCarousel();
+                });
+            });
+
+            const videoFrames = document.querySelectorAll('.video-frame-wrapper');
+            videoFrames.forEach(wrapper => {
+                const video = wrapper.querySelector('video');
+                const overlay = wrapper.querySelector('.play-pause-overlay');
+                let overlayTimer = null;
+
+                if (!video || !overlay) return;
+
+                const showOverlay = (state) => {
+                    overlay.classList.remove('playing', 'paused');
+                    overlay.classList.add(state);
+                    overlay.classList.add('show');
+
+                    if (overlayTimer) clearTimeout(overlayTimer);
+                    overlayTimer = setTimeout(() => {
+                        overlay.classList.remove('show');
+                    }, 800);
+                };
+
+                video.addEventListener('click', () => {
+                    if (video.paused) {
+                        video.play();
+                        showOverlay('playing');
+                    } else {
+                        video.pause();
+                        showOverlay('paused');
+                    }
+                });
+            });
+        });
+    
+    
+        // 하단 네비게이션 버튼 클릭 이벤트
+        document.getElementById('nav-prev').addEventListener('click', () => {
+            if (currentSlideIndex > 1) {
+                goToSlide(currentSlideIndex - 1);
+            } else {
+                goToSlide(1);
+            }
+        });
+
+        document.getElementById('nav-next').addEventListener('click', () => {
+            if (currentSlideIndex < totalSlides) {
+                goToSlide(currentSlideIndex + 1);
+            }
+        });
     </script>
+    <!-- 비디오 모달 (고정 위치 버그 방지를 위해 body 직속으로 이동) -->
+    <div class="video-modal-overlay" id="server-video-modal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" id="close-video-modal-btn">×</button>
+            <video id="server-popup-video" src="유니티images/5페이지/냥냥ai서버.mp4" controls></video>
+        </div>
+    </div>
 </body>
 
 </html>
