@@ -1402,6 +1402,36 @@
             border-radius: 8px;
             display: block;
             background: #f7ead5;
+            transform-origin: center;
+        }
+
+        .slide5-sub-page.active .flowchart-frame img {
+            animation: panFlowchart 18s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+        }
+
+        @keyframes panFlowchart {
+            0% {
+                transform: scale(1) translate(0, 0);
+            }
+            15% {
+                /* Top Left (로그인 / 손님 입장) */
+                transform: scale(2.2) translate(18%, 18%);
+            }
+            40% {
+                /* Top Right (응대 점수 달성) */
+                transform: scale(2.2) translate(-18%, 18%);
+            }
+            65% {
+                /* Bottom Right (음료 제작) */
+                transform: scale(2.2) translate(-18%, -18%);
+            }
+            90% {
+                /* Bottom Left (음료 전달) */
+                transform: scale(2.2) translate(18%, -18%);
+            }
+            100% {
+                transform: scale(1) translate(0, 0);
+            }
         }
 
         .flowchart-typing-box {
@@ -2482,7 +2512,9 @@
                     <div class="flowchart-container">
                         <!-- 플로우 차트 이미지 영역 (화이트 폴라로이드 감성 프레임 적용) -->
                         <div class="flowchart-frame">
-                            <img src="유니티images/5페이지/플로우차트.webp" alt="시스템 플로우 차트">
+                            <div style="overflow: hidden; border-radius: 8px; width: 100%; height: 100%;">
+                                <img src="유니티images/5페이지/플로우차트.webp" alt="시스템 플로우 차트">
+                            </div>
                         </div>
 
                         <!-- 사진 아래 타이핑 텍스트 영역 -->
