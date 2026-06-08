@@ -1858,6 +1858,7 @@
             transform: rotate(var(--r)) translate3d(0, 0, var(--z));
             animation: issueFloat var(--d) ease-in-out infinite alternate;
             overflow: hidden;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .issue-polaroid::after {
@@ -1888,7 +1889,8 @@
             transition:
                 opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
                 transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-                filter 0.85s ease;
+                filter 0.85s ease,
+                height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         .issue-polaroid.is-switching img {
@@ -1912,10 +1914,6 @@
 
         .issue-polaroid.hero img {
             height: 350px;
-        }
-
-        .issue-photo-field.steam-mode .issue-polaroid {
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1) !important;
         }
 
         .issue-photo-field.steam-mode .issue-polaroid:nth-child(n+3) {
