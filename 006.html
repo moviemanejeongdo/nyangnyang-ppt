@@ -46,6 +46,14 @@
             if (video6) {
                 video6.addEventListener('ended', () => {
                     slide6State = 1; // Mark as done when ended
+                    // 재생이 끝나면 자동으로 전체화면 해제
+                    if (document.fullscreenElement || document.webkitFullscreenElement) {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        }
+                    }
                 });
             }
             const urlParams = new URLSearchParams(window.location.search);
@@ -59,22 +67,49 @@
                 e.preventDefault();
                 const video6 = document.getElementById('demo-video-6');
                 if (slide6State === 0) {
-                    if (video6) video6.play();
+                    if (video6) {
+                        video6.play();
+                        // 스페이스바를 누르면 자동으로 전체화면 재생
+                        const container = document.getElementById('slide6-video-container');
+                        if (container) {
+                            if (container.requestFullscreen) {
+                                container.requestFullscreen().catch(err => console.log(err));
+                            } else if (container.webkitRequestFullscreen) {
+                                container.webkitRequestFullscreen();
+                            }
+                        }
+                    }
                     slide6State = 1;
                 } else if (slide6State === 1) {
                     if (video6) {
                         video6.pause();
                     }
+                    // 전체화면 상태라면 해제
+                    if (document.fullscreenElement || document.webkitFullscreenElement) {
+                        if (document.exitFullscreen) {
+                            document.exitFullscreen();
+                        } else if (document.webkitExitFullscreen) {
+                            document.webkitExitFullscreen();
+                        }
+                    }
                     goToSlide(7);
                 }
             } else if (e.code === 'Backspace') {
                 e.preventDefault();
-                if (slide6State === 1) {
-                    const video6 = document.getElementById('demo-video-6');
-                    if (video6) {
-                        video6.pause();
-                        video6.currentTime = 0;
+                const video6 = document.getElementById('demo-video-6');
+                if (video6) {
+                    video6.pause();
+                    video6.currentTime = 0;
+                }
+                // 전체화면 해제
+                if (document.fullscreenElement || document.webkitFullscreenElement) {
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
                     }
+                }
+                if (slide6State === 1) {
                     slide6State = 0;
                 } else {
                     goToSlide(5, 'last');

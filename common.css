@@ -1748,8 +1748,8 @@ h2.title {
     border: 1px solid rgba(92, 141, 98, 0.22);
 }
 
-/* ===== 6페이지 시작: 개발 이슈 회고 CSS ===== */
-#slide-6 {
+/* ===== 7페이지 시작: 개발 이슈 회고 CSS ===== */
+#slide-7 {
     position: relative;
     overflow: hidden;
     padding: 64px 92px;
@@ -1760,7 +1760,7 @@ h2.title {
         linear-gradient(135deg, #f3eadb 0%, #eee6d7 46%, #e7eee4 100%);
 }
 
-#slide-6::before {
+#slide-7::before {
     content: "";
     position: absolute;
     inset: 0;
@@ -1773,7 +1773,7 @@ h2.title {
     pointer-events: none;
 }
 
-#slide-6::after {
+#slide-7::after {
     content: "";
     position: absolute;
     width: 580px;
@@ -2228,4 +2228,28 @@ h2.title {
     color: var(--accent-secondary);
     font-weight: bold;
     font-size: 1.2em;
+}
+
+/* 6페이지 시연영상 전체화면 스타일 */
+#slide6-video-container:fullscreen {
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+}
+#slide6-video-container:fullscreen video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
+}
+#slide6-video-container:-webkit-full-screen {
+    width: 100vw !important;
+    height: 100vh !important;
+    border-radius: 0 !important;
+    background: #000 !important;
+}
+#slide6-video-container:-webkit-full-screen video {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: contain !important;
 }
