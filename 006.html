@@ -20,127 +20,12 @@
     </div>
 
     <div id="presentation">
-        <!-- Slide 6: 개발 중 이슈사항 -->
-        <div class="slide active" id="slide-6">
-            <div class="issue-retro-grid">
-                <div class="issue-photo-field" aria-hidden="true">
-                    <article class="issue-polaroid hero" style="--d: 5.8s;">
-                        <img src="유니티images/6페이지/01.png" alt="">
-                    </article>
-                    <article class="issue-polaroid" style="--w: 285px; --h: 180px; --x: 22px; --y: 64px; --r: -9deg; --z: 20px; --d: 4.8s;">
-                        <img src="유니티images/6페이지/02.png" alt="">
-                    </article>
-                    <article class="issue-polaroid" style="--w: 250px; --h: 168px; --x: 492px; --y: 32px; --r: 8deg; --z: 60px; --d: 5.4s;">
-                        <img src="유니티images/6페이지/03.png" alt="">
-                    </article>
-                    <article class="issue-polaroid" style="--w: 300px; --h: 190px; --x: 42px; --y: 430px; --r: 7deg; --z: 40px; --d: 6.2s;">
-                        <img src="유니티images/6페이지/04.png" alt="">
-                    </article>
-                    <article class="issue-polaroid" style="--w: 260px; --h: 178px; --x: 548px; --y: 510px; --r: -7deg; --z: 35px; --d: 5.1s;">
-                        <img src="유니티images/6페이지/05.png" alt="">
-                    </article>
-                    <article class="issue-polaroid" style="--w: 220px; --h: 150px; --x: 300px; --y: 604px; --r: 5deg; --z: 10px; --d: 4.6s;">
-                        <img src="유니티images/6페이지/2d 느낌 ChatGPT Image 2026년 5월 30일 오전 02_32_42.png" alt="">
-                    </article>
-                </div>
-
-                <div class="issue-content-panel">
-                    <header class="issue-title-block">
-                        <p class="section-kicker">DEVELOPMENT RETROSPECTIVE</p>
-                        <h2 class="issue-title">개발 중<br>이슈사항</h2>
-                    </header>
-
-                    <div class="issue-carousel-shell">
-                        <div class="issue-carousel-track" id="issue-carousel-track">
-                            <article class="issue-card">
-                                <div class="issue-card-label">조예은</div>
-                                <h3>액체 스케일 및 위치 문제</h3>
-                                <p>액체 오브젝트 Scale 증가 시 양방향 확대로 컵 바닥을 뚫고 내려가는 문제 발생. 증가한 높이의 절반만큼 Y축 위치를 위로 보정하여 해결.</p>
-                                <div class="issue-tags">
-                                    <span>Transform Scale</span>
-                                    <span>Y축 위치 보정</span>
-                                    <span>수위 계산</span>
-                                </div>
-                            </article>
-
-                            <article class="issue-card">
-                                <div class="issue-card-label">조예은</div>
-                                <h3>파티클 재생 불안정</h3>
-                                <p>디스펜서 버튼 클릭 시 파티클이 정상 출력되지 않는 문제. 기존 StopEmitting 대신 StopEmittingAndClear로 남은 파티클을 즉시 제거해 안정적인 재생 구현.</p>
-                                <div class="issue-tags">
-                                    <span>Particle System</span>
-                                    <span>StopEmittingAndClear</span>
-                                    <span>재생 초기화</span>
-                                </div>
-                            </article>
-
-                            <article class="issue-card">
-                                <div class="issue-card-label">최재빈</div>
-                                <h3>AI 통신 메모리 한계</h3>
-                                <p>완전 양방향 통신(끼어들기) 시 8GB 메모리 초과(OOM) 발생. 2초 미만 저지연 사수와 쾌적한 템포 유지를 위해 Half-Duplex 방식 채택.</p>
-                                <div class="issue-tags">
-                                    <span>8GB OOM</span>
-                                    <span>Low Latency</span>
-                                    <span>Half-Duplex</span>
-                                </div>
-                            </article>
-
-                            <article class="issue-card">
-                                <div class="issue-card-label">최재빈</div>
-                                <h3>메모리에 맞는 llm 선택으로 페르소나를 이탈한 대사 출력, 풍부하지 못한 대사 출력</h3>
-                                <p>프롬프트 엔지니어링으로 해결</p>
-                                <div class="issue-tags">
-                                    <span>LLM Selection</span>
-                                    <span>Prompt Engineering</span>
-                                    <span>페르소나 유지</span>
-                                </div>
-                            </article>
-
-                            <article class="issue-card">
-                                <div class="issue-card-label">황인용</div>
-                                <h3>한글 ID 경험 유지</h3>
-                                <p>UGS 로그인 규정상 영문 ID 필수. 사용자 화면에는 '냥, 뀨, 멍, 잉' 한글 ID를 유지하고, 내부 전송 단계에서 영문 ID로 매핑하는 구조 구현.</p>
-                                <div class="issue-tags">
-                                    <span>UGS Login</span>
-                                    <span>한글 UX</span>
-                                    <span>내부 영문 매핑</span>
-                                </div>
-                            </article>
-
-                            <article class="issue-card">
-                                <div class="issue-card-label">정해륜</div>
-                                <h3>얼음 배출 물리 상호작용</h3>
-                                <p>스쿠퍼를 기울여도 얼음이 배출되지 않거나 충돌 문제 발생. 스쿠퍼 내부 얼음을 Socket 방식으로 관리하고, 특정 기울기 이상에서 소켓을 해제해 자연스러운 물리 구현.</p>
-                                <div class="issue-tags">
-                                    <span>Socket 관리</span>
-                                    <span>기울기 해제</span>
-                                    <span>중력 표현</span>
-                                </div>
-                            </article>
-
-                            <article class="issue-card">
-                                <div class="issue-card-label">정해륜</div>
-                                <h3>물리 설정과 감도 조정</h3>
-                                <p>얼음, 스쿠퍼, 컵 간 충돌 판정과 인터랙션 감도 불안정으로 예상치 못한 동작 발생. Collider, Rigidbody, 기울기 기준값을 반복 조정하여 사용자 경험 개선.</p>
-                                <div class="issue-tags">
-                                    <span>Collider</span>
-                                    <span>Rigidbody</span>
-                                    <span>Threshold Tuning</span>
-                                </div>
-                            </article>
-                        </div>
-                    </div>
-
-                    <div class="issue-carousel-nav" aria-label="개발 이슈 캐러셀 상태">
-                        <button class="issue-dot active" type="button" data-issue-index="0" aria-label="조예은 이슈 1"></button>
-                        <button class="issue-dot" type="button" data-issue-index="1" aria-label="조예은 이슈 2"></button>
-                        <button class="issue-dot" type="button" data-issue-index="2" aria-label="최재빈 이슈 1"></button>
-                        <button class="issue-dot" type="button" data-issue-index="3" aria-label="최재빈 이슈 2"></button>
-                        <button class="issue-dot" type="button" data-issue-index="4" aria-label="황인용 이슈"></button>
-                        <button class="issue-dot" type="button" data-issue-index="5" aria-label="정해륜 이슈 1"></button>
-                        <button class="issue-dot" type="button" data-issue-index="6" aria-label="정해륜 이슈 2"></button>
-                        <div class="issue-progress"><span class="issue-progress-fill" id="issue-progress-fill"></span></div>
-                    </div>
+        <!-- Slide 6: 시연 영상 -->
+        <div class="slide active" id="slide-6" style="justify-content: center; align-items: center;">
+            <div class="glass-panel" style="width: 85%; max-width: 1500px; height: 85%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; margin: 0 auto;">
+                <h2 class="title" style="margin-bottom: 20px;">시연 영상</h2>
+                <div style="flex: 1; width: 100%; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative;" id="slide6-video-container">
+                    <video id="demo-video-6" src="유니티images/7페이지/시연영상02.mp4" style="width: 100%; height: 100%; object-fit: contain;" preload="metadata"></video>
                 </div>
             </div>
         </div>
@@ -154,191 +39,44 @@
 
     <script src="common.js"></script>
     <script>
-        let issueCardIndex = 0;
-        let issuePhotoTimer = null;
-        let issuePhotoCursor = 0;
-
-        const issuePhotoSources = [
-            "유니티images/6페이지/01.png",
-            "유니티images/6페이지/02.png",
-            "유니티images/6페이지/03.png",
-            "유니티images/6페이지/04.png",
-            "유니티images/6페이지/05.png",
-            "유니티images/6페이지/06.png",
-            "유니티images/6페이지/07.png",
-            "유니티images/6페이지/08.png",
-            "유니티images/6페이지/11.png",
-            "유니티images/6페이지/12.png",
-            "유니티images/6페이지/13.png",
-            "유니티images/6페이지/14.png",
-            "유니티images/6페이지/15.png",
-            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오전 02_30_13.png",
-            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오전 02_51_45.png",
-            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오전 03_39_15.png",
-            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오후 01_41_11.png",
-            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오후 04_33_09.png",
-            "유니티images/6페이지/ChatGPT Image 2026년 5월 30일 오후 05_13_52.png",
-            "유니티images/6페이지/ChatGPT Image 2026년 5월 31일 오후 05_18_36.png",
-            "유니티images/6페이지/ChatGPT Image 2026년 5월 31일 오후 06_02_11.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 023105.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 140805.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 140824.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 140841.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 140858.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 155537.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 155613.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 170714.png",
-            "유니티images/6페이지/스크린샷 2026-05-30 203102.png",
-            "유니티images/6페이지/스크린샷 2026-05-31 175422.png",
-            "유니티images/6페이지/스크린샷 2026-05-31 215430.png",
-            "유니티images/6페이지/스크린샷 2026-06-03 141614.png",
-            "유니티images/6페이지/스크린샷 2026-06-03 144944.png",
-            "유니티images/6페이지/스크린샷 2026-06-07 130007.png",
-            "유니티images/6페이지/스크린샷 2026-06-07 130016.png",
-            "유니티images/6페이지/스크린샷 2026-06-07 130042.png",
-            "유니티images/6페이지/스크린샷 2026-06-07 152341.png",
-            "유니티images/6페이지/스크린샷 2026-06-07 152358.png",
-            "유니티images/6페이지/일반손님.png",
-            "유니티images/6페이지/진상손님.png"
-        ];
-
-        function showIssueCard(index, playSound = true) {
-            const cards = Array.from(document.querySelectorAll('#slide-6 .issue-card'));
-            const track = document.getElementById('issue-carousel-track');
-            const dots = Array.from(document.querySelectorAll('#slide-6 .issue-dot'));
-            const progressFill = document.getElementById('issue-progress-fill');
-            if (!track || cards.length === 0) return false;
-
-            const nextIndex = Math.max(0, Math.min(index, cards.length - 1));
-            if (playSound && issueCardIndex !== nextIndex) {
-                playPopSound();
-            }
-
-            issueCardIndex = nextIndex;
-            track.style.transform = `translateX(-${issueCardIndex * 100}%)`;
-
-            dots.forEach((dot, dotIndex) => {
-                dot.classList.toggle('active', dotIndex === issueCardIndex);
-            });
-
-            if (progressFill) {
-                progressFill.style.width = `${((issueCardIndex + 1) / cards.length) * 100}%`;
-            }
-
-            if (issueCardIndex === 1) {
-                stopIssuePhotoRotator();
-                const field = document.querySelector('#slide-6 .issue-photo-field');
-                if (field) field.classList.add('steam-mode');
-                const slots = Array.from(document.querySelectorAll('#slide-6 .issue-polaroid'));
-                if (slots.length >= 2) {
-                    setIssuePhoto(slots[0], "유니티images/6페이지/steam1.gif");
-                    setIssuePhoto(slots[1], "유니티images/6페이지/steam2.gif");
-                }
-            } else {
-                const field = document.querySelector('#slide-6 .issue-photo-field');
-                if (field) field.classList.remove('steam-mode');
-                if (issuePhotoTimer === null) {
-                    startIssuePhotoRotator();
-                }
-            }
-            return true;
-        }
-
-        function nextIssueCard() {
-            const cards = Array.from(document.querySelectorAll('#slide-6 .issue-card'));
-            if (issueCardIndex < cards.length - 1) {
-                showIssueCard(issueCardIndex + 1);
-                return true;
-            }
-            return false;
-        }
-
-        function previousIssueCard() {
-            if (issueCardIndex > 0) {
-                showIssueCard(issueCardIndex - 1);
-                return true;
-            }
-            return false;
-        }
-
-        function setIssuePhoto(polaroid, src) {
-            const img = polaroid.querySelector('img');
-            if (!img || !src || img.getAttribute('src') === src) return;
-            const nextImage = new Image();
-            nextImage.onload = () => {
-                polaroid.classList.add('is-switching');
-                setTimeout(() => {
-                    img.src = src;
-                    requestAnimationFrame(() => {
-                        polaroid.classList.remove('is-switching');
-                    });
-                }, 240);
-            };
-            nextImage.src = src;
-        }
-
-        function primeIssuePhotos() {
-            document.querySelectorAll('#slide-6 .issue-polaroid img').forEach((img) => {
-                img.onerror = () => {
-                    const fallback = issuePhotoSources.find((src) => src !== img.getAttribute('src'));
-                    if (fallback) {
-                        const nextImage = new Image();
-                        nextImage.onload = () => { img.src = fallback; };
-                        nextImage.src = fallback;
-                    }
-                };
-            });
-        }
-
-        function rotateIssuePhotos() {
-            const slots = Array.from(document.querySelectorAll('#slide-6 .issue-polaroid'));
-            if (slots.length === 0 || issuePhotoSources.length === 0) return;
-            slots.forEach((slot, slotIndex) => {
-                const sourceIndex = (issuePhotoCursor + slotIndex) % issuePhotoSources.length;
-                setIssuePhoto(slot, issuePhotoSources[sourceIndex]);
-            });
-            issuePhotoCursor = (issuePhotoCursor + 1) % issuePhotoSources.length;
-        }
-
-        function startIssuePhotoRotator() {
-            stopIssuePhotoRotator();
-            issuePhotoCursor = 0;
-            primeIssuePhotos();
-            rotateIssuePhotos();
-            issuePhotoTimer = setInterval(rotateIssuePhotos, 2600);
-        }
-
-        function stopIssuePhotoRotator() {
-            if (issuePhotoTimer !== null) {
-                clearInterval(issuePhotoTimer);
-                issuePhotoTimer = null;
-            }
-        }
+        let slide6State = 0; // 0: paused, 1: playing/ended
 
         document.addEventListener('DOMContentLoaded', () => {
-            const urlParams = new URLSearchParams(window.location.search);
-            const initialCard = urlParams.get('step') === 'last' ? 6 : 0;
-
-            startIssuePhotoRotator();
-            showIssueCard(initialCard, false);
-
-            document.querySelectorAll('#slide-6 .issue-dot').forEach(dot => {
-                dot.addEventListener('click', () => {
-                    const nextIndex = Number(dot.dataset.issueIndex || 0);
-                    showIssueCard(nextIndex);
+            const video6 = document.getElementById('demo-video-6');
+            if (video6) {
+                video6.addEventListener('ended', () => {
+                    slide6State = 1; // Mark as done when ended
                 });
-            });
+            }
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('step') === 'last') {
+                slide6State = 1;
+            }
         });
 
         document.addEventListener('keydown', (e) => {
             if (e.code === 'Space') {
                 e.preventDefault();
-                if (!nextIssueCard()) {
+                const video6 = document.getElementById('demo-video-6');
+                if (slide6State === 0) {
+                    if (video6) video6.play();
+                    slide6State = 1;
+                } else if (slide6State === 1) {
+                    if (video6) {
+                        video6.pause();
+                    }
                     goToSlide(7);
                 }
             } else if (e.code === 'Backspace') {
                 e.preventDefault();
-                if (!previousIssueCard()) {
+                if (slide6State === 1) {
+                    const video6 = document.getElementById('demo-video-6');
+                    if (video6) {
+                        video6.pause();
+                        video6.currentTime = 0;
+                    }
+                    slide6State = 0;
+                } else {
                     goToSlide(5, 'last');
                 }
             }

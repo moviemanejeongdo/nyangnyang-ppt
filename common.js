@@ -23,6 +23,9 @@ function resizePresentation() {
         scale = window.innerHeight / 1080;
     }
     presentation.style.transform = `scale(${scale})`;
+    requestAnimationFrame(() => {
+        presentation.classList.add('scaled');
+    });
 }
 
 window.addEventListener('resize', resizePresentation);
