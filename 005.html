@@ -75,6 +75,18 @@
             margin: 0 auto !important;
             transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1) !important;
         }
+
+        .server-card-v2 h4 {
+            font-size: 33px !important; /* 기존 30px -> 33px (2pt 확대) */
+        }
+
+        .server-card-v2 li {
+            font-size: 24px !important; /* 기존 21px -> 24px (2pt 확대) */
+        }
+
+        .highlight-box-v2 {
+            font-size: 23px !important; /* 기존 20px -> 23px (2pt 확대) */
+        }
     </style>
 </head>
 <body>
@@ -351,7 +363,7 @@
                         const viewport = document.getElementById('carousel-viewport-v2');
                         const track = document.getElementById('carousel-track-v2');
                         if (viewport && track) {
-                            const targetY = (viewport.offsetHeight / 2) - (cards[0].offsetHeight / 2) - cards[0].offsetTop;
+                            const targetY = (viewport.offsetHeight / 2) - (cards[0].offsetHeight / 2) - cards[0].offsetTop - 100;
                             track.style.transform = `translateY(${targetY}px)`;
                         }
                     });
@@ -524,7 +536,7 @@
                         const viewport = document.getElementById('carousel-viewport-v2');
                         const track = document.getElementById('carousel-track-v2');
                         if (viewport && track) {
-                            const targetY = (viewport.offsetHeight / 2) - (activeCard.offsetHeight / 2) - activeCard.offsetTop;
+                            const targetY = (viewport.offsetHeight / 2) - (activeCard.offsetHeight / 2) - activeCard.offsetTop - 100;
                             track.style.transform = `translateY(${targetY}px)`;
                         }
                         slide5Sub2State++;
@@ -571,7 +583,7 @@
                             const viewport = document.getElementById('carousel-viewport-v2');
                             const track = document.getElementById('carousel-track-v2');
                             if (viewport && track) {
-                                const targetY = (viewport.offsetHeight / 2) - (activeCard.offsetHeight / 2) - activeCard.offsetTop;
+                                const targetY = (viewport.offsetHeight / 2) - (activeCard.offsetHeight / 2) - activeCard.offsetTop - 100;
                                 track.style.transform = `translateY(${targetY}px)`;
                             }
                         });
@@ -598,7 +610,7 @@
                         const viewport = document.getElementById('carousel-viewport-v2');
                         const track = document.getElementById('carousel-track-v2');
                         if (viewport && track) {
-                            const targetY = (viewport.offsetHeight / 2) - (activeCard.offsetHeight / 2) - activeCard.offsetTop;
+                            const targetY = (viewport.offsetHeight / 2) - (activeCard.offsetHeight / 2) - activeCard.offsetTop - 100;
                             track.style.transform = `translateY(${targetY}px)`;
                         }
                     } else {
