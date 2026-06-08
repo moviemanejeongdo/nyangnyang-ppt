@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냥냥 카페 1호점 - 리뉴얼 기안</title>
+    <!-- 고급 폰트 적용 (Pretendard & Outfit) -->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Spline 느낌의 레트로퓨처리즘 무빙 블러 오버레이 -->
+    <div id="spline-transition">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="glass-blur"></div>
+    </div>
+
+    <div id="presentation">
+        <!-- Slide 5: 주요 기능 구현 (서브페이지 캐러셀 지원) -->
+        <div class="slide active" id="slide-5">
+            <div class="flowchart-content">
+                <header style="display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 24px;">
+                    <div>
+                        <p class="section-kicker">KEY FEATURES</p>
+                        <h2 class="members-title" style="font-size: 68px; margin: 0;">주요 기능 구현</h2>
+                    </div>
+                    <div id="slide5-sub2-header-extras" style="text-align: right; opacity: 0; transition: opacity 0.6s ease; padding-bottom: 8px;">
+                        <h3 class="server-title" style="font-size: 38px; font-weight: 900; color: #3a2a20; margin: 0 0 6px 0; text-shadow: 0 2px 5px rgba(255,255,255,0.8);">냥냥 AI 서버</h3>
+                        <blockquote class="server-quote" style="font-size: 18px; font-style: italic; color: var(--accent-secondary); margin: 0; padding-left: 12px; border-left: 4px solid var(--accent-secondary); font-weight: 800; display: inline-block;">"API 키 과금 없이, 아카데미 노트북 2대만으로 구현한 실시간 AI NPC"</blockquote>
+                    </div>
+                </header>
+
+                <!-- 5-1: 플로우 차트 서브 페이지 -->
+                <div class="slide5-sub-page active" id="slide5-sub-1">
+                    <div class="flowchart-container">
+                        <!-- 플로우 차트 이미지 영역 (화이트 폴라로이드 감성 프레임 적용) -->
+                        <div class="flowchart-frame">
+                            <div style="overflow: hidden; border-radius: 8px; width: 100%; height: 100%;">
+                                <img src="유니티images/5페이지/플로우차트.webp" alt="시스템 플로우 차트">
+                            </div>
+                        </div>
+
+                        <!-- 사진 아래 타이핑 텍스트 영역 -->
+                        <div class="flowchart-typing-box">
+                            <div id="flowchart-typing-text"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-2: 냥냥 AI 서버 소개 서브 페이지 -->
+                <div class="slide5-sub-page" id="slide5-sub-2">
+                    <div class="server-intro-container-v2">
+                        <!-- 캐러셀 영역 -->
+                        <div class="server-carousel-column-v2" id="carousel-viewport-v2">
+                            <div class="server-carousel-track-v2" id="carousel-track-v2">
+                                <!-- 카드 1 -->
+                                <div class="server-card-v2">
+                                    <h4>1. 로컬에서 작동하는 2초 미만의 저지연 (Low-Latency) 실시간 대화</h4>
+                                    <ul>                                        
+                                        <li><strong>다이렉트 바이너리 통신</strong>: HTTP/Base64 변환을 생략한 순수 바이너리 웹소켓 전송</li>
+                                        <li><strong>에코 캡처(echo capture) 차단</strong>: TTS 출력음이 마이크로 재유입되어 STT가 사용자 발화로 오인식하는 문제 해결</li>
+                                        <li><strong>실시간 친절도 평가</strong>: 유저의 응대 태도에 따라 실시간 AI 응대 점수 계산</li>
+                                        <li><strong>5명의 특색있는 페르소나</strong>: 개그우먼, 틱톡커, 외국인 등</li>
+                                        <li><strong>팀원 친화적인 다양한 원클릭 기능</strong>: 백엔드 서버 코드 적용시 발생할 수 있는 트러블 슈팅 완벽 해결</li>
+                                    </ul>
+                                </div>
+                                <!-- 카드 2 -->
+                                <div class="server-card-v2">
+                                    <h4>2. 감정이 살아있는 표현력 (Emotion)</h4>
+                                    <ul>
+                                        <li><strong>감정 음성 합성</strong>: 슈퍼톤 음성 엔진을 통해 텍스트와 동시에 숨소리, 감탄사 합성</li>
+                                    </ul>
+                                </div>
+                                <!-- 카드 3 -->
+                                <div class="server-card-v2">
+                                    <h4>3. 기기 2대의 로컬 분산 처리 (Distributed)</h4>
+                                    <ul>
+                                        <li><strong>역할 분담</strong>: 노트북 A(VR 렌더링 & STT) ↔ 노트북 B(LLM & TTS 연산) 이원화</li>
+                                        <li><strong>오토 디스커버리</strong>: 번거로운 IP 입력 없이 원클릭 자동 연결 및 소켓 페어링</li>
+                                    </ul>
+                                    <div class="highlight-box-v2">
+                                        <strong style="color: #c87a41; font-size: 24px; display: block; margin-bottom: 8px;">🔥 LLM-TTS 메모리 밸런싱 최적화</strong>
+                                        8GB VRAM이라는 제한된 환경에서 최적의 성능을 끌어내기 위해 20개가 넘는 LLM 모델들을 일일이 성능 테스트하며 치열한 R&D를 진행. 이를 바탕으로 LLM과 TTS가 동시에 안정적으로 동작하도록 GPU 레이어, 컨텍스트 크기, 배치/마이크로배치, KV 캐시 양자화, TTS GPU Provider, 워밍업 순서를 직접 조정. 1주일 넘게 밤샘 작업하며 VRAM 충돌, 첫 응답 지연, CPU 폴백 문제를 해결, 실시간 대화와 음성 합성이 끊기지 않도록 메모리 사용 흐름을 세밀하게 최적화.
+                                    </div>
+                                </div>
+                                <!-- 카드 4: 시연 영상 -->
+                                <div class="server-card-v2" style="display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                                    <h4 style="width: 100%; text-align: left;">4. 냥냥 AI 서버 시연 영상</h4>
+                                    <div class="card-video-container" id="open-video-modal-btn" style="position: relative; width: 640px; margin-top: 10px; border-radius: 20px; overflow: hidden; box-shadow: 0 15px 40px rgba(0,0,0,0.25); border: 4px solid white; cursor: pointer; transition: transform 0.3s ease;">
+                                        <div class="live-badge" style="position: absolute; top: 12px; left: 12px; background: rgba(255, 60, 60, 0.9); color: white; padding: 4px 10px; border-radius: 8px; font-weight: 800; font-size: 14px; z-index: 10; display: flex; align-items: center; gap: 4px;"><span style="width: 6px; height: 6px; background: white; border-radius: 50%; display: inline-block; animation: blinkCursor 1s infinite;"></span>LIVE</div>
+                                        <video src="유니티images/5페이지/냥냥ai서버.mp4" muted loop playsinline style="width: 100%; display: block;"></video>
+                                        <div class="play-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.3); display: flex; align-items: center; justify-content: center;">
+                                            <div class="play-btn" style="color: white; transform: scale(1.5);">
+                                                <svg width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z" /></svg>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-3: 음료 제조 알고리즘 서브 페이지 -->
+                <div class="slide5-sub-page" id="slide5-sub-3">
+                    <div class="ingredient-process-container">
+                        <div class="ingredient-visual-panel">
+                            <img src="유니티images/5페이지/cup.gif" alt="물, 우유, 시럽 제조 과정" id="drink-recipe-img">
+                            <div class="ingredient-caption">Water · Milk · Syrup</div>
+                        </div>
+
+                        <div class="ingredient-text-panel">
+                            <p class="section-kicker" style="margin-bottom: 0;">DRINK SYSTEM</p>
+                            <h3 class="ingredient-title">음료 제조 로직 구현</h3>
+                            <p class="ingredient-subtitle">컵 안의 재료량과 액체 높이를 실시간으로 계산해 제조 과정을 시각화.</p>
+
+                            <div class="ingredient-step-list">
+                                <section class="ingredient-step">
+                                    <h4>1. 재료 관리 알고리즘</h4>
+                                    <p>컵 내부에 들어간 물, 우유, 시럽의 양을 Dictionary로 기록해 음료 제조 상태를 추적.</p>
+                                </section>
+
+                                <section class="ingredient-step">
+                                    <h4>2. 액체 높이 시각화</h4>
+                                    <p>현재 음료량을 기준으로 컵 속 액체 높이를 계산하고, 높이 증가량의 절반만큼 Y축 위치를 보정해 자연스럽게 차오르는 효과 구현</p>
+                                </section>
+                            </div>
+
+                            <div class="ingredient-keywords">
+                                <span>Dictionary 기반 재료 추적</span>
+                                <span>실시간 높이 계산</span>
+                                <span>Y축 위치 보정</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-4: 포타필터 탬핑, 에스프레소 샷, 스팀 서브 페이지 -->
+                <div class="slide5-sub-page" id="slide5-sub-4">
+                    <div class="ingredient-process-container">
+                        <div class="ingredient-visual-panel">
+                            <img src="유니티images/5페이지/에스프레소머신.gif" alt="포타필터 탬핑, 에스프레소 샷, 스팀 구현 과정">
+                            <div class="ingredient-caption">Portafilter · Shot · Steam</div>
+                        </div>
+
+                        <div class="ingredient-text-panel">
+                            <p class="section-kicker" style="margin-bottom: 0;">XR INTERACTION</p>
+                            <h3 class="ingredient-title">에스프레소 머신 상호작용</h3>
+                            <p class="ingredient-subtitle">포타필터 장착부터 버튼 입력까지 XR Interaction Toolkit 이벤트로 연결.</p>
+
+                            <div class="ingredient-step-list">
+                                <section class="ingredient-step">
+                                    <h4>1. XRSocketInteractor 감지</h4>
+                                    <p>에스프레소 머신 소켓에 포타필터가 닿으면 selectEntered 이벤트를 받고, 대상이 포타필터인지 한 번 더 확인해 장착을 처리.</p>
+                                </section>
+
+                                <section class="ingredient-step">
+                                    <h4>2. VR 버튼 입력 구현</h4>
+                                    <p>XR Poke Interactor로 탬핑, 샷 추출, 스팀 버튼을 구성. 버튼 반응성은 추가 개선이 필요한 부분으로 정리.</p>
+                                </section>
+                            </div>
+
+                            <div class="ingredient-keywords">
+                                <span>Socket 이벤트</span>
+                                <span>포타필터 검증</span>
+                                <span>VR 버튼 입력</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-5: 아이스 메이커 서브 페이지 -->
+                <div class="slide5-sub-page" id="slide5-sub-5">
+                    <div class="ingredient-process-container">
+                        <div class="ingredient-visual-panel">
+                            <img src="유니티images/5페이지/얼음-컵-평가.gif" alt="아이스 메이커와 얼음 담기 시스템">
+                            <div class="ingredient-caption">Ice Maker · Scooper · Cup</div>
+                        </div>
+
+                        <div class="ingredient-text-panel">
+                            <p class="section-kicker" style="margin-bottom: 0;">ICE SYSTEM</p>
+                            <h3 class="ingredient-title">얼음 담기와 주문 평가</h3>
+                            <p class="ingredient-subtitle">스쿠퍼 조작, 얼음 이동, 주문 완료 평가까지 하나의 제조 흐름으로 구현.</p>
+
+                            <div class="ingredient-step-list">
+                                <section class="ingredient-step">
+                                    <h4>1. 얼음 푸기 및 담기</h4>
+                                    <p>Grab Interactable로 스쿠퍼를 직접 집고, Socket Interactor로 내부에 얼음이 담기게 구성. 스쿠퍼가 기울어지면 소켓을 해제해 얼음이 컵으로 떨어지도록 제작.</p>
+                                </section>
+
+                                <section class="ingredient-step">
+                                    <h4>2. 주문 완료 및 평가</h4>
+                                    <p>완성 컵을 주문대에 올리면 주문이 자동 완료되고, 컵 안의 얼음 개수를 기준과 비교해 많음, 적음, 적정 여부를 판별.</p>
+                                </section>
+                            </div>
+
+                            <div class="ingredient-keywords">
+                                <span>Grab Interactable</span>
+                                <span>Socket 해제</span>
+                                <span>얼음 개수 평가</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5-6: 커피 그라인더 서브 페이지 -->
+                <div class="slide5-sub-page" id="slide5-sub-6">
+                    <div class="ingredient-process-container">
+                        <div class="ingredient-visual-panel">
+                            <img src="유니티images/5페이지/그라인더.gif" alt="커피 그라인더와 포타필터 원두 분쇄 연출">
+                            <div class="ingredient-caption">Grinder · Haptic · Particle</div>
+                        </div>
+
+                        <div class="ingredient-text-panel">
+                            <p class="section-kicker" style="margin-bottom: 0;">GRINDER SYSTEM</p>
+                            <h3 class="ingredient-title">커피 그라인더 연출 구현</h3>
+                            <p class="ingredient-subtitle">포타필터 장착, 분쇄 사운드, 햅틱 진동, 원두 파티클을 한 번의 상호작용으로 묶음.</p>
+
+                            <div class="ingredient-step-list">
+                                <section class="ingredient-step">
+                                    <h4>1. 자석식 포타필터 장착</h4>
+                                    <p>포타필터를 그라인더 소켓에 가져가면 자동으로 고정되도록 구성해 실제 장비에 끼우는 느낌을 구현.</p>
+                                </section>
+
+                                <section class="ingredient-step">
+                                    <h4>2. 분쇄 피드백과 재장착 방지</h4>
+                                    <p>버튼 입력 시 분쇄 소리, 햅틱 진동, 원두 파티클 누적 연출을 실행. 원두가 채워진 뒤에는 다시 장착되지 않도록 상태를 코드로 제어.</p>
+                                </section>
+                            </div>
+
+                            <div class="ingredient-keywords">
+                                <span>자석 장착</span>
+                                <span>햅틱 피드백</span>
+                                <span>파티클 누적</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 비디오 모달 -->
+    <div class="video-modal-overlay" id="server-video-modal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" id="close-video-modal-btn">×</button>
+            <video id="server-popup-video" src="유니티images/5페이지/냥냥ai서버.mp4" controls></video>
+        </div>
+    </div>
+
+    <div class="nav-hint" id="nav-hint">
+        <span class="nav-btn" id="nav-prev">&lt;</span>
+        <span id="nav-current">5 / 9</span>
+        <span class="nav-btn" id="nav-next">&gt;</span>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        let slide5SubIndex = 1;
+        let slide5Sub2State = 0;
+        const typingText = "로그인 -> 손님 입장 -> 응대 점수 달성 -> 음료 제작 -> 음료 전달";
+        let typingIndex = 0;
+        let typingTimer = null;
+
+        function showSlide5SubPage(targetIndex, direction = 'next') {
+            const subPages = Array.from(document.querySelectorAll('#slide-5 .slide5-sub-page'));
+            const sub1 = document.getElementById('slide5-sub-1');
+            const sub2 = document.getElementById('slide5-sub-2');
+            const activeSub = subPages[targetIndex - 1];
+            if (!sub1 || !sub2 || !activeSub) return;
+
+            const headerExtras = document.getElementById('slide5-sub2-header-extras');
+            if (targetIndex === 2) {
+                if (headerExtras) headerExtras.style.opacity = '1';
+                slide5Sub2State = 0;
+                const cards = sub2.querySelectorAll('.server-card-v2');
+                cards.forEach(card => card.classList.remove('active'));
+                const track = document.getElementById('carousel-track-v2');
+                if (track) track.style.transform = `translateY(0px)`;
+                const thumbVideo = sub2.querySelector('.card-video-container video');
+                if (thumbVideo) thumbVideo.play();
+            } else {
+                if (headerExtras) headerExtras.style.opacity = '0';
+                const thumbVideo = sub2.querySelector('.card-video-container video');
+                if (thumbVideo) thumbVideo.pause();
+                const popupVideo = document.getElementById('server-popup-video');
+                if (popupVideo) popupVideo.pause();
+            }
+
+            if (slide5SubIndex !== targetIndex) {
+                playPopSound();
+            }
+
+            const inactiveSubs = subPages.filter(page => page !== activeSub);
+
+            if (direction === 'next') {
+                inactiveSubs.forEach(page => {
+                    page.classList.remove('active', 'exit-right');
+                    page.classList.add('exit-left');
+                });
+                activeSub.classList.remove('exit-left');
+                activeSub.classList.add('exit-right');
+                activeSub.offsetHeight; // force reflow
+                activeSub.classList.remove('exit-right');
+                activeSub.classList.add('active');
+            } else {
+                inactiveSubs.forEach(page => {
+                    page.classList.remove('active', 'exit-left');
+                    page.classList.add('exit-right');
+                });
+                activeSub.classList.remove('exit-right');
+                activeSub.classList.add('exit-left');
+                activeSub.offsetHeight; // force reflow
+                activeSub.classList.remove('exit-left');
+                activeSub.classList.add('active');
+            }
+
+            slide5SubIndex = targetIndex;
+
+            if (targetIndex === 1) {
+                startFlowchartTyping();
+            } else {
+                if (typingTimer) {
+                    clearInterval(typingTimer);
+                    typingTimer = null;
+                }
+                const container = document.getElementById('flowchart-typing-text');
+                if (container) container.textContent = '';
+            }
+        }
+
+        function startFlowchartTyping() {
+            const container = document.getElementById('flowchart-typing-text');
+            if (!container) return;
+
+            if (typingTimer) {
+                clearInterval(typingTimer);
+                typingTimer = null;
+            }
+            container.textContent = '';
+            typingIndex = 0;
+
+            typingTimer = setInterval(() => {
+                if (typingIndex < typingText.length) {
+                    container.textContent += typingText.charAt(typingIndex);
+                    typingIndex++;
+                } else {
+                    clearInterval(typingTimer);
+                    typingTimer = null;
+                }
+            }, 30);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.get('step') === 'last') {
+                showSlide5SubPage(6, 'prev');
+            } else {
+                showSlide5SubPage(1, 'next');
+            }
+
+            // 비디오 클릭 제어
+            const videoFrames = document.querySelectorAll('.video-frame-wrapper');
+            videoFrames.forEach(wrapper => {
+                const video = wrapper.querySelector('video');
+                const overlay = wrapper.querySelector('.play-pause-overlay');
+                let overlayTimer = null;
+
+                if (!video || !overlay) return;
+
+                const showOverlay = (state) => {
+                    overlay.classList.remove('playing', 'paused');
+                    overlay.classList.add(state);
+                    overlay.classList.add('show');
+
+                    if (overlayTimer) clearTimeout(overlayTimer);
+                    overlayTimer = setTimeout(() => {
+                        overlay.classList.remove('show');
+                    }, 800);
+                };
+
+                video.addEventListener('click', () => {
+                    if (video.paused) {
+                        video.play();
+                        showOverlay('playing');
+                    } else {
+                        video.pause();
+                        showOverlay('paused');
+                    }
+                });
+            });
+
+            // 비디오 모달 제어
+            const openBtn = document.getElementById('open-video-modal-btn');
+            const closeBtn = document.getElementById('close-video-modal-btn');
+            const modal = document.getElementById('server-video-modal');
+            const popupVideo = document.getElementById('server-popup-video');
+
+            if (openBtn && closeBtn && modal && popupVideo) {
+                openBtn.addEventListener('click', () => {
+                    playPopSound();
+                    modal.classList.add('open');
+                    popupVideo.currentTime = 0;
+                    popupVideo.play();
+                });
+
+                const closeModal = () => {
+                    playPopSound();
+                    modal.classList.remove('open');
+                    popupVideo.pause();
+                };
+
+                closeBtn.addEventListener('click', closeModal);
+                modal.addEventListener('click', (e) => {
+                    if (e.target === modal) closeModal();
+                });
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+
+                if (slide5SubIndex === 1) {
+                    showSlide5SubPage(2, 'next');
+                } else if (slide5SubIndex === 2) {
+                    const cards = document.querySelectorAll('#slide5-sub-2 .server-card-v2');
+                    if (slide5Sub2State < cards.length) {
+                        playPopSound();
+                        cards.forEach(c => c.classList.remove('active'));
+                        const activeCard = cards[slide5Sub2State];
+                        activeCard.classList.add('active');
+
+                        const viewport = document.getElementById('carousel-viewport-v2');
+                        const track = document.getElementById('carousel-track-v2');
+                        if (viewport && track) {
+                            const cardTop = activeCard.offsetTop;
+                            const targetY = 280 - cardTop;
+                            track.style.transform = `translateY(${targetY}px)`;
+                        }
+                        slide5Sub2State++;
+                    } else if (slide5Sub2State === cards.length) {
+                        const modal = document.getElementById('server-video-modal');
+                        const popupVideo = document.getElementById('server-popup-video');
+                        if (modal) {
+                            playPopSound();
+                            modal.classList.add('open');
+                        }
+                        if (popupVideo) {
+                            popupVideo.play();
+                        }
+                        slide5Sub2State++;
+                    } else if (slide5Sub2State >= cards.length + 1) {
+                        const modal = document.getElementById('server-video-modal');
+                        const popupVideo = document.getElementById('server-popup-video');
+                        if (modal && modal.classList.contains('open')) {
+                            modal.classList.remove('open');
+                            if (popupVideo) popupVideo.pause();
+                        }
+                        showSlide5SubPage(3, 'next');
+                    }
+                } else if (slide5SubIndex >= 3 && slide5SubIndex < 6) {
+                    showSlide5SubPage(slide5SubIndex + 1, 'next');
+                } else if (slide5SubIndex === 6) {
+                    goToSlide(6);
+                }
+            } else if (e.code === 'Backspace') {
+                e.preventDefault();
+
+                if (slide5SubIndex > 3) {
+                    showSlide5SubPage(slide5SubIndex - 1, 'prev');
+                } else if (slide5SubIndex === 3) {
+                    showSlide5SubPage(2, 'prev');
+                } else if (slide5SubIndex === 2) {
+                    if (slide5Sub2State > 0) {
+                        const cards = document.querySelectorAll('#slide5-sub-2 .server-card-v2');
+                        const modal = document.getElementById('server-video-modal');
+                        const popupVideo = document.getElementById('server-popup-video');
+
+                        if (slide5Sub2State === cards.length + 1) {
+                            if (popupVideo) {
+                                popupVideo.pause();
+                                popupVideo.currentTime = 0;
+                            }
+                            if (modal) {
+                                modal.classList.remove('open');
+                            }
+                            slide5Sub2State--;
+                        } else {
+                            slide5Sub2State--;
+                            cards.forEach(c => c.classList.remove('active'));
+                            if (slide5Sub2State > 0) {
+                                const activeCard = cards[slide5Sub2State - 1];
+                                activeCard.classList.add('active');
+                                const track = document.getElementById('carousel-track-v2');
+                                if (track) {
+                                    const cardTop = activeCard.offsetTop;
+                                    const targetY = 280 - cardTop;
+                                    track.style.transform = `translateY(${targetY}px)`;
+                                }
+                            } else {
+                                const track = document.getElementById('carousel-track-v2');
+                                if (track) track.style.transform = `translateY(0px)`;
+                            }
+                        }
+                    } else {
+                        showSlide5SubPage(1, 'prev');
+                    }
+                } else {
+                    goToSlide(4);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

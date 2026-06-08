@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냥냥 카페 1호점 - 리뉴얼 기안</title>
+    <!-- 고급 폰트 적용 (Pretendard & Outfit) -->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Spline 느낌의 레트로퓨처리즘 무빙 블러 오버레이 -->
+    <div id="spline-transition">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="glass-blur"></div>
+    </div>
+
+    <div id="presentation">
+        <!-- Slide 4: 프로젝트 개요 -->
+        <div class="slide active" id="slide-4">
+            <div class="overview-content">
+                <header>
+                    <p class="section-kicker">PROJECT OVERVIEW</p>
+                    <h2 class="members-title" style="font-size: 68px; margin-bottom: 24px;">프로젝트 개요</h2>
+                </header>
+
+                <div class="overview-cards">
+                    <!-- 1. 기획 의도 -->
+                    <div class="info-card" style="margin-bottom: 20px;">
+                        <h3>기획 의도</h3>
+                        <p><span class="highlight">VR 환경</span>에서 다양한 <span class="highlight">AI 손님 페르소나</span>(일반 유형,
+                            급한 유형, 컴플레인 유형 등)와 <span class="highlight">실시간 대화하며 바리스타 업무를 체험</span>하는 시뮬레이션</p>
+                    </div>
+
+                    <!-- 2. 타겟 유저 -->
+                    <div class="info-card" style="margin-bottom: 20px;">
+                        <h3>타겟 유저</h3>
+                        <div class="target-tags">
+                            <span class="target-tag"><span class="highlight highlight-green">커뮤니케이션 연습이 필요한
+                                    은둔청년</span></span>
+                            <span class="target-tag"><span class="highlight highlight-green">알바 경험 없는 초년생</span></span>
+                            <span class="target-tag"><span class="highlight highlight-green">VR 스트리머</span></span>
+                        </div>
+                    </div>
+
+                    <!-- 3. 팀 목표 -->
+                    <div class="info-card">
+                        <h3>팀 목표</h3>
+                        <ul class="goals-list">
+                            <li><span class="highlight highlight-gold">XR 인터랙션</span>을 활용한 음료 제조 경험 제공</li>
+                            <li><span class="highlight highlight-gold">AI NPC 기반</span> 자연스러운 주문/대화 시스템 구축</li>
+                            <li><span class="highlight highlight-gold">Meta Quest 3</span> 환경 최적화</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 우측 기획의도 이미지 갤러리 -->
+            <div class="overview-gallery">
+                <div class="visual-frame">
+                    <img src="유니티images/4페이지 기획의도/유튜브브이로그.png" alt="유튜브 브이로그 예시">
+                    <div class="visual-caption">MZ 세대는 알바전 알바 브이로그를 찾아 본다</div>
+                </div>
+                <div class="visual-frame">
+                    <img src="유니티images/4페이지 기획의도/녹음 2026-06-06 211050.gif" alt="실시간 VR 바리스타 모션">
+                    <div class="visual-caption">VR면접 시장 만큼 알바 경험 시장 수요도 큼</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-hint" id="nav-hint">
+        <span class="nav-btn" id="nav-prev">&lt;</span>
+        <span id="nav-current">4 / 9</span>
+        <span class="nav-btn" id="nav-next">&gt;</span>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // 슬라이드 활성화 클래스 추가하여 애니메이션 작동 유도
+            setTimeout(() => {
+                const slide = document.getElementById('slide-4');
+                if (slide) slide.classList.add('active');
+            }, 100);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                goToSlide(5);
+            } else if (e.code === 'Backspace') {
+                e.preventDefault();
+                goToSlide(3, 'last');
+            }
+        });
+    </script>
+</body>
+</html>

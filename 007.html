@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냥냥 카페 1호점 - 리뉴얼 기안</title>
+    <!-- 고급 폰트 적용 (Pretendard & Outfit) -->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Spline 느낌의 레트로퓨처리즘 무빙 블러 오버레이 -->
+    <div id="spline-transition">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="glass-blur"></div>
+    </div>
+
+    <div id="presentation">
+        <!-- Slide 7: 시연 영상 -->
+        <div class="slide active" id="slide-7" style="justify-content: center; align-items: center;">
+            <div class="glass-panel" style="width: 85%; max-width: 1500px; height: 85%; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px; margin: 0 auto;">
+                <h2 class="title" style="margin-bottom: 20px;">시연 영상</h2>
+                <div style="flex: 1; width: 100%; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 10px 30px rgba(0,0,0,0.5); position: relative;" id="slide7-video-container">
+                    <video id="demo-video-7" src="유니티images/7페이지/시연영상02.mp4" style="width: 100%; height: 100%; object-fit: contain;" preload="metadata"></video>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-hint" id="nav-hint">
+        <span class="nav-btn" id="nav-prev">&lt;</span>
+        <span id="nav-current">7 / 9</span>
+        <span class="nav-btn" id="nav-next">&gt;</span>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        let slide7State = 0; // 0: paused, 1: playing
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const video7 = document.getElementById('demo-video-7');
+            if (video7) {
+                video7.addEventListener('ended', () => {
+                    slide7State = 1; // Mark as done when ended
+                });
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                const video7 = document.getElementById('demo-video-7');
+                if (slide7State === 0) {
+                    if (video7) video7.play();
+                    slide7State = 1;
+                } else if (slide7State === 1) {
+                    if (video7) {
+                        video7.pause();
+                    }
+                    goToSlide(8);
+                }
+            } else if (e.code === 'Backspace') {
+                e.preventDefault();
+                if (slide7State === 1) {
+                    const video7 = document.getElementById('demo-video-7');
+                    if (video7) {
+                        video7.pause();
+                        video7.currentTime = 0;
+                    }
+                    slide7State = 0;
+                } else {
+                    goToSlide(6, 'last');
+                }
+            }
+        });
+    </script>
+</body>
+</html>

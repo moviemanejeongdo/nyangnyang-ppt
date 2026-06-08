@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냥냥 카페 1호점 - 리뉴얼 기안</title>
+    <!-- 고급 폰트 적용 (Pretendard & Outfit) -->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Spline 느낌의 레트로퓨처리즘 무빙 블러 오버레이 -->
+    <div id="spline-transition">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="glass-blur"></div>
+    </div>
+
+    <div id="presentation">
+        <!-- Slide 3: 멤버 소개 -->
+        <div class="slide active" id="slide-3">
+            <div class="members-bg-rotator" aria-hidden="true"></div>
+            <div class="members-layout">
+                <header>
+                    <p class="section-kicker">TEAM MEMBERS</p>
+                    <h2 class="members-title">멤버 소개</h2>
+                    <p class="members-subtitle">VR 카페 시뮬레이션을 함께 만든 Team. 알바들</p>
+                </header>
+
+                <div class="team-badge">팀명 · 알바들</div>
+
+                <div class="member-carousel">
+                    <div class="member-track">
+                        <article class="member-card is-active">
+                            <div class="member-head">
+                                <strong class="member-name">조예은</strong>
+                                <span class="member-role">TEAM LEADER</span>
+                            </div>
+                            <ol class="member-tasks">
+                                <li><span class="task-title">우유, 물 디스펜서 구현</span></li>
+                                <li><span class="task-title">컵 시스템 구현</span></li>
+                                <li><span class="task-title">시럽 펌프 구현</span></li>
+                                <li><span class="task-title">재료별 용량 관리 시스템 구현</span></li>
+                                <li><span class="task-title">케릭터 디자인, 리깅/애니메이션</span></li>                                
+                            </ol>
+                        </article>
+
+                        <article class="member-card">
+                            <div class="member-head">
+                                <strong class="member-name">최재빈</strong>
+                                <span class="member-role">AI SERVER</span>
+                            </div>
+                            <ol class="member-tasks">
+                                <li><span class="task-title">LLM, TTS, STT 동시에 작동하는 서버 프로그램 제작</span></li>
+                                <li><span class="task-title">NPC 페르소나, 커스터머 응대 점수 로직 프롬프트 엔지니어링</span></li>
+                                <li><span class="task-title">NPC 소통 UI 패널</span></li>
+                                <li><span class="task-title">사용자 음성인식 패널</span></li>
+                                <li><span class="task-title">그라인더 인터렉션</span></li>
+                                <li><span class="task-title">리깅/애니메이션</span></li>
+                            </ol>
+                        </article>
+
+                        <article class="member-card">
+                            <div class="member-head">
+                                <strong class="member-name">황인용</strong>
+                                <span class="member-role">ORDER &amp; MANUFACTURE</span>
+                            </div>
+                            <ol class="member-tasks">
+                                <li>
+                                    <span class="task-title">OrderManager</span>
+                                    <span class="task-detail">LLM Server와 간접 통신, 주문 시작 등 관리</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">ManufacturingManager</span>
+                                    <span class="task-detail">음료가 올바른 과정에 따라 제작 되는지 확인</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">음료 제작</span>
+                                    <span class="task-detail">탬핑, 샷 추출, 스팀</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">UGS</span>
+                                    <span class="task-detail">로그인</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">로그인 씬 연출</span>
+                                    <span class="task-detail">Timeline, Cinemachine 사용</span>
+                                </li>
+                            </ol>
+                        </article>
+
+                        <article class="member-card">
+                            <div class="member-head">
+                                <strong class="member-name">정해륜</strong>
+                                <span class="member-role">XR &amp; LEVEL</span>
+                            </div>
+                            <ol class="member-tasks">
+                                <li>
+                                    <span class="task-title">아이스메이커 시스템 기능 구현</span>
+                                    <span class="task-detail">- 일정 시간 간격으로 얼음 생성<br>- 아이스박스 내부 얼음 수량에 따라 생성 자동 제어</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">아이스-컵 인터랙션 구현</span>
+                                    <span class="task-detail">- 스쿠퍼를 이용한 얼음 담기 및 컵에 넣기<br>- 스쿠퍼 기울기에 따른 얼음 배출 기능 구현</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">주문 완료 시스템 구현</span>
+                                    <span class="task-detail">- 주문대에 컵 배치 시 주문 완료 처리</span>
+                                </li>
+                                <li>
+                                    <span class="task-title">카페 환경 제작</span>
+                                    <span class="task-detail">- AI 기반 3D 모델 활용<br>- Unity 환경 내 카페 맵 구성</span>
+                                </li>
+                            </ol>
+                        </article>
+                    </div>
+
+                    <div class="member-carousel-footer">
+                        <span class="member-progress" id="member-progress">01 / 04</span>
+                        <div class="member-dots" aria-hidden="true">
+                            <span class="member-dot is-active"></span>
+                            <span class="member-dot"></span>
+                            <span class="member-dot"></span>
+                            <span class="member-dot"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-hint" id="nav-hint">
+        <span class="nav-btn" id="nav-prev">&lt;</span>
+        <span id="nav-current">3 / 9</span>
+        <span class="nav-btn" id="nav-next">&gt;</span>
+    </div>
+
+    <script src="유니티images/3페이지/slide3-images.js"></script>
+    <script src="common.js"></script>
+    <script>
+        const memberBgIntervalSeconds = 2;
+        let memberBgTimer = null;
+        let memberBgIndex = 0;
+        let memberCardIndex = 0;
+
+        function showMemberCard(index) {
+            const cards = Array.from(document.querySelectorAll('#slide-3 .member-card'));
+            const dots = Array.from(document.querySelectorAll('#slide-3 .member-dot'));
+            const progress = document.getElementById('member-progress');
+            if (cards.length === 0) return;
+
+            const nextIndex = Math.max(0, Math.min(index, cards.length - 1));
+
+            if (memberCardIndex !== nextIndex) {
+                playPopSound();
+            }
+
+            cards.forEach((card, cardIndex) => {
+                const wasActive = card.classList.contains('is-active');
+                card.classList.toggle('is-active', cardIndex === nextIndex);
+                card.classList.toggle('is-exiting', wasActive && cardIndex !== nextIndex);
+
+                if (wasActive && cardIndex !== nextIndex) {
+                    setTimeout(() => {
+                        card.classList.remove('is-exiting');
+                    }, 650);
+                }
+            });
+
+            dots.forEach((dot, dotIndex) => {
+                dot.classList.toggle('is-active', dotIndex === nextIndex);
+            });
+
+            if (progress) {
+                progress.textContent = `${String(nextIndex + 1).padStart(2, '0')} / ${String(cards.length).padStart(2, '0')}`;
+            }
+
+            memberCardIndex = nextIndex;
+        }
+
+        function nextMemberCard() {
+            const cards = Array.from(document.querySelectorAll('#slide-3 .member-card'));
+            if (memberCardIndex < cards.length - 1) {
+                showMemberCard(memberCardIndex + 1);
+                return true;
+            }
+            return false;
+        }
+
+        function previousMemberCard() {
+            if (memberCardIndex > 0) {
+                showMemberCard(memberCardIndex - 1);
+                return true;
+            }
+            return false;
+        }
+
+        function rotateMemberBackground() {
+            const rotator = document.querySelector('.members-bg-rotator');
+            const imageList = Array.isArray(window.SLIDE3_BACKGROUND_IMAGES) ? window.SLIDE3_BACKGROUND_IMAGES : [];
+            if (!rotator || imageList.length === 0) return;
+
+            const cardTL = rotator.querySelector('.polaroid-card.pos-tl');
+            const cardTR = rotator.querySelector('.polaroid-card.pos-tr');
+            const cardBR = rotator.querySelector('.polaroid-card.pos-br');
+            const cardBL = rotator.querySelector('.polaroid-card.pos-bl');
+            const cardEnter = rotator.querySelector('.polaroid-card.pos-enter');
+
+            if (cardBL) {
+                cardBL.className = 'polaroid-card pos-exit';
+                setTimeout(() => {
+                    cardBL.remove();
+                }, 850);
+            }
+
+            if (cardBR) cardBR.className = 'polaroid-card pos-bl';
+            if (cardTR) cardTR.className = 'polaroid-card pos-br';
+            if (cardTL) cardTL.className = 'polaroid-card pos-tr';
+            if (cardEnter) cardEnter.className = 'polaroid-card pos-tl';
+
+            const nextSrc = imageList[memberBgIndex];
+            memberBgIndex = (memberBgIndex + 1) % imageList.length;
+
+            const newCard = document.createElement('div');
+            newCard.className = 'polaroid-card pos-enter';
+
+            const newImg = document.createElement('img');
+            newImg.src = nextSrc;
+            newImg.alt = '';
+            newImg.loading = 'lazy';
+            newCard.appendChild(newImg);
+
+            rotator.appendChild(newCard);
+        }
+
+        function startMemberBackgroundRotator() {
+            stopMemberBackgroundRotator();
+
+            const imageList = Array.isArray(window.SLIDE3_BACKGROUND_IMAGES) ? window.SLIDE3_BACKGROUND_IMAGES : [];
+            if (imageList.length <= 4 || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+            memberBgTimer = setInterval(rotateMemberBackground, memberBgIntervalSeconds * 1000);
+        }
+
+        function stopMemberBackgroundRotator() {
+            if (memberBgTimer !== null) {
+                clearInterval(memberBgTimer);
+                memberBgTimer = null;
+            }
+        }
+
+        function setupMemberBackgroundRotator() {
+            const rotator = document.querySelector('.members-bg-rotator');
+            const imageList = Array.isArray(window.SLIDE3_BACKGROUND_IMAGES) ? window.SLIDE3_BACKGROUND_IMAGES : [];
+
+            if (!rotator || imageList.length === 0) return;
+
+            rotator.innerHTML = '';
+
+            const initialPositions = ['pos-tl', 'pos-tr', 'pos-br', 'pos-bl'];
+            for (let i = 0; i < 4; i++) {
+                const src = imageList[i % imageList.length];
+                const card = document.createElement('div');
+                card.className = `polaroid-card ${initialPositions[i]}`;
+
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = '';
+                img.loading = 'eager';
+
+                card.appendChild(img);
+                rotator.appendChild(card);
+            }
+
+            memberBgIndex = 4 % imageList.length;
+
+            const nextSrc = imageList[memberBgIndex];
+            memberBgIndex = (memberBgIndex + 1) % imageList.length;
+
+            const enterCard = document.createElement('div');
+            enterCard.className = 'polaroid-card pos-enter';
+
+            const enterImg = document.createElement('img');
+            enterImg.src = nextSrc;
+            enterImg.alt = '';
+            enterImg.loading = 'lazy';
+
+            enterCard.appendChild(enterImg);
+            rotator.appendChild(enterCard);
+
+            startMemberBackgroundRotator();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // URL 파라미터가 last이면 마지막 멤버 카드로 초기설정
+            const urlParams = new URLSearchParams(window.location.search);
+            const initialCard = urlParams.get('step') === 'last' ? 3 : 0;
+
+            setupMemberBackgroundRotator();
+            showMemberCard(initialCard);
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                if (!nextMemberCard()) {
+                    goToSlide(4);
+                }
+            } else if (e.code === 'Backspace') {
+                e.preventDefault();
+                if (!previousMemberCard()) {
+                    goToSlide(2);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냥냥 카페 1호점 - 리뉴얼 기안</title>
+    <!-- 고급 폰트 적용 (Pretendard & Outfit) -->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Spline 느낌의 레트로퓨처리즘 무빙 블러 오버레이 -->
+    <div id="spline-transition">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="glass-blur"></div>
+    </div>
+
+    <div id="presentation">
+        <!-- Slide 9: Q&A -->
+        <div class="slide active" id="slide-9" style="justify-content: center; align-items: center;">
+            <div class="glass-panel" style="width: 80%; height: 60%; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+                <h2 style="font-size: 5em; color: var(--accent-primary); margin-bottom: 20px; font-weight: 900; letter-spacing: 0.1em; text-align: center;">Q & A</h2>
+                <p style="font-size: 1.8em; color: var(--text-muted); text-align: center;">경청해 주셔서 감사합니다. 자유롭게 질문해 주세요!</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-hint" id="nav-hint">
+        <span class="nav-btn" id="nav-prev">&lt;</span>
+        <span id="nav-current">9 / 9</span>
+        <span class="nav-btn" id="nav-next">&gt;</span>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                // 마지막 슬라이드이므로 스페이스바 작동 없음
+            } else if (e.code === 'Backspace') {
+                e.preventDefault();
+                goToSlide(8, 'last');
+            }
+        });
+    </script>
+</body>
+</html>

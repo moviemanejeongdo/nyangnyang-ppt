@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냥냥 카페 1호점 - 리뉴얼 기안</title>
+    <!-- 고급 폰트 적용 (Pretendard & Outfit) -->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Spline 느낌의 레트로퓨처리즘 무빙 블러 오버레이 -->
+    <div id="spline-transition">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="glass-blur"></div>
+    </div>
+
+    <div id="presentation">
+        <!-- Slide 1: 인트로 -->
+        <div class="slide active" id="slide-1" style="padding: 0;">
+            <!-- 왼쪽 문 (Cafe Door) -->
+            <div class="intro-wall">
+                <div class="door-panel"></div>
+                <div class="door-panel-bottom"></div>
+                <div class="door-handle"></div>
+            </div>
+
+            <div class="intro-image-wrapper">
+                <img src="옆에서빼꼼하는사진_nobg.png" alt="빼꼼 메이드 고양이" id="maid-image">
+            </div>
+
+            <div class="intro-text-wrapper">
+                <div class="reveal-text-container">
+                    <div class="reveal-text" id="intro-title">어서오세요<br>냥냥카페 1호점에</div>
+                </div>
+                <div class="sub-reveal-text" id="intro-subtitle">VR CAFE SIMULATION PROJECT</div>
+                <div class="team-name" id="intro-team">Presented by Team. 알바들</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-hint" id="nav-hint">
+        <span class="nav-btn" id="nav-prev">&lt;</span>
+        <span id="nav-current">1 / 9</span>
+        <span class="nav-btn" id="nav-next">&gt;</span>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        let introState = 0; // 0: 초기(숨김), 1: 텍스트&메이드 등장, 2: 이후 슬라이드 이동
+
+        // 마지막 단계로 강제 설정 감지
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.get('step') === 'last') {
+            document.getElementById('maid-image').classList.remove('hide');
+            document.getElementById('maid-image').classList.add('show');
+            document.getElementById('intro-title').classList.add('show');
+            document.getElementById('intro-subtitle').classList.add('show');
+            document.getElementById('intro-team').classList.add('show');
+            introState = 1;
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault(); // 스페이스바 스크롤 방지
+
+                if (introState === 0) {
+                    // 1. 벽 뒤에서 메이드가 45도로 갸우뚱하며 나오고, 텍스트 페이드 인
+                    playPopSound(); // 뿅! 사운드 재생
+                    document.getElementById('maid-image').classList.remove('hide');
+                    document.getElementById('maid-image').classList.add('show');
+                    document.getElementById('intro-title').classList.add('show');
+                    document.getElementById('intro-subtitle').classList.add('show');
+                    document.getElementById('intro-team').classList.add('show');
+                    introState = 1;
+                } else if (introState === 1) {
+                    // 2. Spline 느낌의 부드러운 블러 & 무빙 오빗 트랜지션
+                    const transition = document.getElementById('spline-transition');
+                    if (transition) transition.classList.add('active'); // 서서히 블러가 깔리고 빛이 퍼짐
+
+                    playDoorOpenSound(); // 사운드 재생
+
+                    setTimeout(() => {
+                        goToSlide(2); // 화면이 완전히 몽환적으로 블러 처리됐을 때 슬라이드 2로 교체
+                    }, 1500); // 1.5초 대기 (블러와 빛이 최대로 찼을 때)
+
+                    introState = 2; // 이후 슬라이드 이동 상태
+                }
+            } else if (e.code === 'Backspace') {
+                e.preventDefault();
+                if (introState === 1) {
+                    // 1페이지에서 텍스트가 떠있는 상태면 다시 벽 뒤로 숨김
+                    document.getElementById('maid-image').classList.remove('show');
+                    document.getElementById('maid-image').classList.add('hide');
+                    document.getElementById('intro-title').classList.remove('show');
+                    document.getElementById('intro-subtitle').classList.remove('show');
+                    document.getElementById('intro-team').classList.remove('show');
+                    introState = 0;
+                }
+            }
+        });
+    </script>
+</body>
+</html>

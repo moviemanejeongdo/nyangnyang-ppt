@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>냥냥 카페 1호점 - 리뉴얼 기안</title>
+    <!-- 고급 폰트 적용 (Pretendard & Outfit) -->
+    <link rel="stylesheet" as="style" crossorigin
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard-dynamic-subset.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="common.css">
+</head>
+<body>
+    <!-- Spline 느낌의 레트로퓨처리즘 무빙 블러 오버레이 -->
+    <div id="spline-transition">
+        <div class="orb orb1"></div>
+        <div class="orb orb2"></div>
+        <div class="orb orb3"></div>
+        <div class="glass-blur"></div>
+    </div>
+
+    <div id="presentation">
+        <!-- Slide 2: 목차 -->
+        <div class="slide active" id="slide-2">
+            <div class="glass-panel">
+                <h2 class="title">목차</h2>
+                <ul class="toc-list">
+                    <li class="toc-item"><span class="toc-number">01</span> 멤버 소개</li>
+                    <li class="toc-item"><span class="toc-number">02</span> 프로젝트 개요</li>
+                    <li class="toc-item"><span class="toc-number">03</span> 주요 기능 구현</li>
+                    <li class="toc-item"><span class="toc-number">04</span> 개발 중 이슈사항</li>
+                    <li class="toc-item"><span class="toc-number">05</span> 시연영상</li>
+                    <li class="toc-item"><span class="toc-number">06</span> 팀원별 소감</li>
+                    <li class="toc-item"><span class="toc-number">07</span> Q&amp;A</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-hint" id="nav-hint">
+        <span class="nav-btn" id="nav-prev">&lt;</span>
+        <span id="nav-current">2 / 9</span>
+        <span class="nav-btn" id="nav-next">&gt;</span>
+    </div>
+
+    <script src="common.js"></script>
+    <script>
+        let tocAutoTimer = null;
+        let tocAutoIndex = 0;
+
+        function clearTocAutoHighlight() {
+            document.querySelectorAll('#slide-2 .toc-item').forEach(item => item.classList.remove('auto-active'));
+        }
+
+        function startTocAutoHighlight() {
+            stopTocAutoHighlight();
+
+            const items = Array.from(document.querySelectorAll('#slide-2 .toc-item'));
+            if (items.length === 0) return;
+
+            tocAutoIndex = 0;
+            items[tocAutoIndex].classList.add('auto-active');
+
+            tocAutoTimer = setInterval(() => {
+                items[tocAutoIndex].classList.remove('auto-active');
+                tocAutoIndex = (tocAutoIndex + 1) % items.length;
+                items[tocAutoIndex].classList.add('auto-active');
+            }, 1000);
+        }
+
+        function stopTocAutoHighlight() {
+            if (tocAutoTimer !== null) {
+                clearInterval(tocAutoTimer);
+                tocAutoTimer = null;
+            }
+            clearTocAutoHighlight();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            startTocAutoHighlight();
+
+            // 목차 클릭 시 해당 슬라이드로 즉시 이동하도록 바인딩
+            document.querySelectorAll('#slide-2 .toc-item').forEach((item, index) => {
+                item.addEventListener('click', () => {
+                    if (index === 0) {
+                        goToSlide(3); // 1. 멤버 소개 -> 3페이지
+                    } else if (index === 1) {
+                        goToSlide(4); // 2. 프로젝트 개요 -> 4페이지
+                    } else if (index === 2) {
+                        goToSlide(5); // 3. 주요 기능 구현 -> 5페이지
+                    } else if (index === 3) {
+                        goToSlide(6); // 4. 개발 중 이슈사항 -> 6페이지
+                    } else if (index === 4) {
+                        goToSlide(7); // 5. 시연영상 -> 7페이지
+                    } else if (index === 5) {
+                        goToSlide(8); // 6. 팀원별 소감 -> 8페이지
+                    } else if (index === 6) {
+                        goToSlide(9); // 7. Q&A -> 9페이지
+                    }
+                });
+            });
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.code === 'Space') {
+                e.preventDefault();
+                goToSlide(3);
+            } else if (e.code === 'Backspace') {
+                e.preventDefault();
+                goToSlide(1, 'last');
+            }
+        });
+    </script>
+</body>
+</html>
