@@ -1569,9 +1569,9 @@ h2.title {
 .video-modal-overlay {
     position: fixed;
     top: 0; left: 0; width: 100vw; height: 100vh;
-    background: rgba(10, 10, 10, 0.85);
-    backdrop-filter: blur(15px);
-    -webkit-backdrop-filter: blur(15px);
+    background: rgba(10, 10, 10, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
     z-index: 99999;
     display: flex;
     align-items: center;
@@ -1588,8 +1588,11 @@ h2.title {
 
 .video-modal-content {
     position: relative;
-    width: 85%;
-    max-width: 1400px;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transform: scale(0.95);
     transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -1600,28 +1603,36 @@ h2.title {
 
 .video-modal-content video {
     width: 100%;
-    border-radius: 16px;
-    box-shadow: 0 30px 60px rgba(0,0,0,0.6);
+    height: 100%;
+    object-fit: contain;
     outline: none;
     background: black;
 }
 
 .video-modal-close {
     position: absolute;
-    top: -50px;
-    right: 0;
-    background: none;
+    top: 30px;
+    right: 40px;
+    background: rgba(0, 0, 0, 0.5);
     border: none;
     color: white;
-    font-size: 42px;
+    font-size: 50px;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
-    transition: transform 0.3s;
+    transition: all 0.3s;
     line-height: 1;
+    z-index: 100000;
 }
 
 .video-modal-close:hover {
-    transform: rotate(90deg) scale(1.2);
+    transform: rotate(90deg) scale(1.1);
     color: var(--accent-primary);
+    background: rgba(0, 0, 0, 0.8);
 }
 
 /* 5-3: 음료 제조 알고리즘 소개 */
